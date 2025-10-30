@@ -3,55 +3,59 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Nepal Land Calculator & Unit Converter | Eduwonka</title>
+<title>Nepal Land price Calculator & Unit Converter |</title>
 <style>
-  :root{
-    --bg:#f4f7fb;
-    --card:#ffffff;
-    --accent:#2b7cff;
-    --muted:#6b7280;
+  :root {
+    --bg: #f4f7fb;
+    --card: #ffffff;
+    --accent: #2b7cff;
+    --muted: #6b7280;
     font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   }
-  html,body{height:100%; margin:0; background:linear-gradient(180deg,#eef6ff 0%,var(--bg) 100%); color:#111827;}
-  .container{max-width:1100px; margin:28px auto; padding:20px;}
-  header{display:flex;gap:16px;align-items:center;margin-bottom:20px;}
-  .logo{
-    width:64px;height:64px;border-radius:12px;display:flex;align-items:center;justify-content:center;
-    background:linear-gradient(135deg,var(--accent),#66a3ff); box-shadow:0 6px 18px rgba(43,124,255,0.18);
-    color:white;font-weight:700;font-size:20px;
+  html, body {
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(180deg, #eef6ff 0%, var(--bg) 100%);
+    color: #111827;
   }
-  h1{font-size:20px;margin:0}
-  p.lead{margin:0;color:var(--muted); font-size:14px}
-  .grid{display:grid;grid-template-columns: repeat(auto-fit, minmax(340px,1fr)); gap:18px; margin-top:18px;}
-  .card{background:var(--card); border-radius:12px; padding:18px; box-shadow:0 6px 20px rgba(15,23,42,0.06);}
-  .card h2{margin:0 0 8px 0; font-size:16px}
-  label{font-size:13px;color:var(--muted)}
-  input[type="number"], select{
-    width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ef;font-size:14px;
-    outline:none; box-sizing:border-box; margin-top:6px;
+  .container {
+    max-width: 1100px;
+    margin: 28px auto;
+    padding: 20px;
   }
-  input[type="number"]:focus, select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(43,124,255,0.12);}
-  .unit-inputs input{width:70px}
-  .btn{
-    background:var(--accent); color:white; border:none;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:600;
-    box-shadow:0 6px 18px rgba(43,124,255,0.16);margin-right:6px;
+  header {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 20px;
   }
-  .btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(43,124,255,0.12);box-shadow:none}
-  .result{margin-top:12px;padding:12px;border-radius:10px;background:#fff;border:1px solid #eef3ff}
-  .result .value{font-weight:700;font-size:18px}
-  .muted{color:var(--muted)}
-  .copy-btn{background:#0f172a;color:white;padding:8px 10px;border-radius:8px;border:none;cursor:pointer}
-  .help{font-size:13px;color:var(--muted);margin-top:8px}
-  footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
-
-  /* Converter Section */
-  .converter{margin-top:28px;padding:20px;background:#fff;border-radius:16px;box-shadow:0 6px 20px rgba(15,23,42,0.06);}
-  .converter h2{text-align:center;color:var(--accent);margin-bottom:18px;}
-  .unit-info{margin-top:30px;background:#f9fafe;border-radius:14px;padding:20px;box-shadow:0 4px 14px rgba(0,0,0,0.05);}
-  .unit-info h3{text-align:center;color:var(--accent);margin-bottom:14px;}
-  .unit-card{background:#fff;border-left:5px solid var(--accent);padding:10px 14px;margin-bottom:10px;border-radius:10px;}
-  .unit-card h4{margin:0;color:var(--accent);}
-  .unit-card p{margin:4px 0 0;font-size:13px;color:#444;line-height:1.5;}
+  .logo {
+    width: 64px; height: 64px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--accent), #66a3ff);
+    box-shadow: 0 6px 18px rgba(43,124,255,0.18);
+    color: white; font-weight: 700; font-size: 20px;
+  }
+  h1 { font-size: 20px; margin: 0 }
+  p.lead { margin: 0; color: var(--muted); font-size: 14px }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px,1fr)); gap: 18px; margin-top: 18px; }
+  .card { background: var(--card); border-radius: 12px; padding: 18px; box-shadow: 0 6px 20px rgba(15,23,42,0.06); }
+  .card h2 { margin: 0 0 8px 0; font-size: 16px }
+  label { font-size: 13px; color: var(--muted) }
+  input[type="number"], select {
+    width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #e6e9ef; font-size: 14px;
+    outline: none; box-sizing: border-box; margin-top: 6px;
+  }
+  .unit-inputs input { width: 70px; }
+  .btn {
+    background: var(--accent); color: white; border: none; padding: 10px 14px; border-radius: 10px;
+    cursor: pointer; font-weight: 600; box-shadow: 0 6px 18px rgba(43,124,255,0.16); margin-right: 6px;
+  }
+  .btn.ghost { background: transparent; color: var(--accent); border: 1px solid rgba(43,124,255,0.12); box-shadow: none; }
+  .result { margin-top: 12px; padding: 12px; border-radius: 10px; background: #fff; border: 1px solid #eef3ff }
+  .result .value { font-weight: 700; font-size: 18px }
+  .muted { color: var(--muted) }
+  .copy-btn { background: #0f172a; color: white; padding: 8px 10px; border-radius: 8px; border: none; cursor: pointer }
 </style>
 </head>
 <body>
@@ -60,7 +64,7 @@
     <div class="logo">LR</div>
     <div>
       <h1>Nepal Land Calculator & Unit Converter</h1>
-      <p class="lead">Calculate • Convert • Add/Subtract • Divide (Ropani · Aana · Daam · Paisa · Bigha)</p>
+      <p class="lead">Calculate • Convert • Add/Subtract • Divide (Ropani · Aana · Daam · Paisa)</p>
     </div>
   </header>
 
@@ -69,8 +73,15 @@
     <!-- PRICE CALCULATOR -->
     <section class="card">
       <h2>Land Price Calculator</h2>
-      <label>Price per Ropani (₨)</label>
-      <input id="pricePerRopani" type="number" placeholder="e.g. 44000">
+      <label>Price per Unit:</label>
+      <input id="priceRate" type="number" placeholder="e.g. 44000">
+      <select id="priceUnit">
+        <option value="ropani">Ropani</option>
+        <option value="aana">Aana</option>
+        <option value="daam">Daam</option>
+        <option value="paisa">Paisa</option>
+      </select>
+
       <div class="unit-inputs">
         <input id="pc_ropani" type="number" placeholder="Ropani">
         <input id="pc_aana" type="number" placeholder="Aana" max="15">
@@ -91,19 +102,23 @@
     <!-- ADD/SUBTRACT -->
     <section class="card">
       <h2>Land Add / Subtract</h2>
-      <label>First Land</label>
-      <div class="unit-inputs">
-        <input id="l1r" type="number" placeholder="Ropani">
-        <input id="l1a" type="number" placeholder="Aana">
-        <input id="l1d" type="number" placeholder="Daam">
-        <input id="l1p" type="number" placeholder="Paisa">
+      <div id="landRows">
+        <div class="unit-inputs land-row">
+          <input type="number" placeholder="Ropani">
+          <input type="number" placeholder="Aana">
+          <input type="number" placeholder="Daam">
+          <input type="number" placeholder="Paisa">
+        </div>
+        <div class="unit-inputs land-row">
+          <input type="number" placeholder="Ropani">
+          <input type="number" placeholder="Aana">
+          <input type="number" placeholder="Daam">
+          <input type="number" placeholder="Paisa">
+        </div>
       </div>
-      <label>Second Land</label>
-      <div class="unit-inputs">
-        <input id="l2r" type="number" placeholder="Ropani">
-        <input id="l2a" type="number" placeholder="Aana">
-        <input id="l2d" type="number" placeholder="Daam">
-        <input id="l2p" type="number" placeholder="Paisa">
+      <div style="margin-top:8px;">
+        <button class="btn" onclick="addRow()">+ Add More</button>
+        <button class="btn ghost" onclick="removeRow()">− Remove</button>
       </div>
       <select id="operation">
         <option value="add">Add</option>
@@ -118,67 +133,7 @@
         <div id="landDecimal">—</div>
       </div>
     </section>
-
-    <!-- DIVISION -->
-    <section class="card">
-      <h2>Land Division Calculator</h2>
-      <label>Total Land</label>
-      <div class="unit-inputs">
-        <input id="div_r" type="number" placeholder="Ropani">
-        <input id="div_a" type="number" placeholder="Aana">
-        <input id="div_d" type="number" placeholder="Daam">
-        <input id="div_p" type="number" placeholder="Paisa">
-      </div>
-      <label>Divide Into (number of parts)</label>
-      <input id="div_parts" type="number" min="1" placeholder="e.g. 2, 3, 4">
-      <button class="btn" onclick="divideLand()">Divide</button>
-      <button class="btn ghost" onclick="resetDivide()">Reset</button>
-      <div id="divideResult" class="result" style="display:none">
-        <div class="muted">Each Portion:</div>
-        <div class="value" id="eachPortion">—</div>
-        <div class="muted">Decimal Ropani per Portion:</div>
-        <div id="eachDecimal">—</div>
-        <div class="muted" id="remainderInfo" style="margin-top:8px"></div>
-      </div>
-    </section>
-
   </div>
-
-  <!-- UNIT CONVERTER -->
-  <div class="converter">
-    <h2>🏠 Land Unit Converter</h2>
-    <label>Enter Value:</label>
-    <input type="number" id="value" placeholder="Enter number" step="any" />
-    <label>Select Unit:</label>
-    <select id="unit">
-      <option value="bigha">Bigha</option>
-      <option value="kattha">Kattha</option>
-      <option value="dhur">Dhur</option>
-      <option value="ropani">Ropani</option>
-      <option value="aana">Aana</option>
-      <option value="paisa">Paisa</option>
-      <option value="daam">Daam</option>
-      <option value="sqm">Square Meter (m²)</option>
-      <option value="sqft">Square Feet (ft²)</option>
-    </select>
-
-    <div class="result" id="output">
-      <p>Converted results will appear here.</p>
-    </div>
-
-    <div class="unit-info">
-      <h3>📏 Nepal Land Measurement Units</h3>
-      <div class="unit-card"><h4>1 Bigha (बिघा)</h4><p>= 20 Kattha = 6,772.63 m² = 72,900 sq.ft. = 13.31 Ropani</p></div>
-      <div class="unit-card"><h4>1 Kattha (कठ्ठा)</h4><p>= 20 Dhur = 338.63 m² = 3,645 sq.ft.</p></div>
-      <div class="unit-card"><h4>1 Dhur (धुर)</h4><p>= 16.93 m² = 182.25 sq.ft.</p></div>
-      <div class="unit-card"><h4>1 Ropani (रोपनी)</h4><p>= 16 Aana = 64 Paisa = 256 Daam = 508.72 m² = 5,476 sq.ft.</p></div>
-      <div class="unit-card"><h4>1 Aana (आना)</h4><p>= 4 Paisa = 16 Daam = 31.80 m² = 342.25 sq.ft.</p></div>
-      <div class="unit-card"><h4>1 Paisa (पैसा)</h4><p>= 4 Daam = 7.95 m² = 85.56 sq.ft.</p></div>
-      <div class="unit-card"><h4>1 Daam (दाम)</h4><p>= 1.99 m² = 21.39 sq.ft.</p></div>
-    </div>
-  </div>
-
-  <footer>© 2025 Eduwonka — All-in-One Nepal Land Calculator & Converter</footer>
 </div>
 
 <script>
@@ -188,51 +143,78 @@ const PAISA_PER_ROPANI=AANA_PER_ROPANI*DAAM_PER_AANA*PAISA_PER_DAAM;
 function toPaisa(r,a,d,p){return (r||0)*PAISA_PER_ROPANI+(a||0)*DAAM_PER_AANA*PAISA_PER_DAAM+(d||0)*PAISA_PER_DAAM+(p||0);}
 function toRADP(paisa){const sign=paisa<0?-1:1;let p=Math.abs(paisa);const r=Math.floor(p/PAISA_PER_ROPANI);p%=PAISA_PER_ROPANI;const a=Math.floor(p/(DAAM_PER_AANA*PAISA_PER_DAAM));p%=(DAAM_PER_AANA*PAISA_PER_DAAM);const d=Math.floor(p/PAISA_PER_DAAM);const ps=p%PAISA_PER_DAAM;return{sign,r,a,d,p:ps};}
 function formatRADP(o){return`${o.sign<0?'-':''}${o.r} Ropani ${o.a} Aana ${o.d} Daam ${o.p} Paisa`;}
-function calculatePrice(){const rate=parseFloat(pricePerRopani.value);const paisa=toPaisa(+pc_ropani.value,+pc_aana.value,+pc_daam.value,+pc_paisa.value);const ropaniDec=paisa/PAISA_PER_ROPANI;const total=rate*ropaniDec;priceValue.textContent="₨ "+total.toLocaleString(undefined,{maximumFractionDigits:2});priceRopani.textContent=ropaniDec.toFixed(6);priceResult.style.display='block';}
-function resetPrice(){['pricePerRopani','pc_ropani','pc_aana','pc_daam','pc_paisa'].forEach(id=>document.getElementById(id).value='');priceResult.style.display='none';}
-function copyPrice(){if(priceResult.style.display==='none'){alert("No result to copy");return;}navigator.clipboard.writeText("Price: "+priceValue.textContent+" | Ropani: "+priceRopani.textContent);alert("Copied!");}
-function landOperation(){const p1=toPaisa(+l1r.value,+l1a.value,+l1d.value,+l1p.value);const p2=toPaisa(+l2r.value,+l2a.value,+l2d.value,+l2p.value);const op=operation.value;const res=op==="add"?p1+p2:p1-p2;const radp=toRADP(res);landValue.textContent=formatRADP(radp);landDecimal.textContent=(res/PAISA_PER_ROPANI).toFixed(6);landResult.style.display='block';}
-function resetLand(){['l1r','l1a','l1d','l1p','l2r','l2a','l2d','l2p'].forEach(id=>document.getElementById(id).value='');landResult.style.display='none';}
-function divideLand(){const totalPaisa=toPaisa(+div_r.value,+div_a.value,+div_d.value,+div_p.value);const parts=parseInt(div_parts.value);if(!parts||parts<1){alert("Enter valid number of parts");return;}const per=Math.floor(totalPaisa/parts);const remainder=totalPaisa%parts;const perRADP=toRADP(per);eachPortion.textContent=formatRADP(perRADP);eachDecimal.textContent=(per/PAISA_PER_ROPANI).toFixed(6);remainderInfo.textContent=remainder>0?`Remainder: ${formatRADP(toRADP(remainder))}`:"";divideResult.style.display='block';}
-function resetDivide(){['div_r','div_a','div_d','div_p','div_parts'].forEach(id=>document.getElementById(id).value='');divideResult.style.display='none';}
 
-/* --- Converter Logic --- */
-const conversions={bigha:{m2:6772.63},kattha:{m2:338.63},dhur:{m2:16.93},ropani:{m2:508.72},aana:{m2:31.80},paisa:{m2:7.95},daam:{m2:1.99},sqm:{m2:1},sqft:{m2:0.092903}};
-const sqFeetPerM2=10.7639;
-document.getElementById("value").addEventListener("input",convert);
-document.getElementById("unit").addEventListener("change",convert);
-function convert(){
-  const val=parseFloat(document.getElementById("value").value);
-  const unit=document.getElementById("unit").value;
-  const output=document.getElementById("output");
-  if(isNaN(val)||val<=0){output.innerHTML="<p>Please enter a valid number.</p>";return;}
-  const inM2=val*conversions[unit].m2;
-  const inSqFt=inM2*sqFeetPerM2;
-  const results={
-    bigha:inM2/conversions.bigha.m2,
-    kattha:inM2/conversions.kattha.m2,
-    dhur:inM2/conversions.dhur.m2,
-    ropani:inM2/conversions.ropani.m2,
-    aana:inM2/conversions.aana.m2,
-    paisa:inM2/conversions.paisa.m2,
-    daam:inM2/conversions.daam.m2,
-    sqm:inM2,
-    sqft:inSqFt
-  };
-  output.innerHTML=`
-    <p><b>${val} ${unit.replace("sqm","m²").replace("sqft","ft²")}</b> equals:</p><hr>
-    <p>🌾 <b>${results.bigha.toFixed(4)}</b> Bigha</p>
-    <p>🌾 <b>${results.kattha.toFixed(4)}</b> Kattha</p>
-    <p>🌾 <b>${results.dhur.toFixed(4)}</b> Dhur</p>
-    <p>⛰️ <b>${results.ropani.toFixed(4)}</b> Ropani</p>
-    <p>⛰️ <b>${results.aana.toFixed(4)}</b> Aana</p>
-    <p>⛰️ <b>${results.paisa.toFixed(4)}</b> Paisa</p>
-    <p>⛰️ <b>${results.daam.toFixed(4)}</b> Daam</p>
-    <hr>
-    <p>📏 <b>${results.sqm.toFixed(2)}</b> Square Meters (m²)</p>
-    <p>📐 <b>${results.sqft.toFixed(2)}</b> Square Feet (ft²)</p>
-  `;
+/* --- Updated Price Calculation --- */
+function calculatePrice(){
+  const rate=parseFloat(priceRate.value);
+  const unit=priceUnit.value;
+  if(!rate){alert("Enter price per unit.");return;}
+  const paisa=toPaisa(+pc_ropani.value,+pc_aana.value,+pc_daam.value,+pc_paisa.value);
+  const ropaniDec=paisa/PAISA_PER_ROPANI;
+
+  let unitToRopani=1;
+  if(unit==="aana")unitToRopani=1/16;
+  else if(unit==="daam")unitToRopani=1/256;
+  else if(unit==="paisa")unitToRopani=1/64;
+
+  const total=rate*(ropaniDec/unitToRopani);
+  priceValue.textContent="₨ "+total.toLocaleString(undefined,{maximumFractionDigits:2});
+  priceRopani.textContent=ropaniDec.toFixed(6);
+  priceResult.style.display='block';
+}
+function resetPrice(){['priceRate','pc_ropani','pc_aana','pc_daam','pc_paisa'].forEach(id=>document.getElementById(id)?.value='');priceResult.style.display='none';}
+function copyPrice(){if(priceResult.style.display==='none'){alert("No result to copy");return;}navigator.clipboard.writeText("Price: "+priceValue.textContent+" | Ropani: "+priceRopani.textContent);alert("Copied!");}
+
+/* --- Updated Add/Subtract with Dynamic Rows --- */
+function addRow(){
+  const container=document.getElementById("landRows");
+  const div=document.createElement("div");
+  div.className="unit-inputs land-row";
+  div.innerHTML=`<input type="number" placeholder="Ropani">
+                 <input type="number" placeholder="Aana">
+                 <input type="number" placeholder="Daam">
+                 <input type="number" placeholder="Paisa">`;
+  container.appendChild(div);
+}
+function removeRow(){
+  const rows=document.querySelectorAll(".land-row");
+  if(rows.length>2)rows[rows.length-1].remove();
+}
+function landOperation(){
+  const op=document.getElementById("operation").value;
+  const rows=document.querySelectorAll(".land-row");
+  let resultPaisa=op==="add"?0:toPaisaFromRow(rows[0]);
+  if(op==="add"){
+    rows.forEach(r=>{resultPaisa+=toPaisaFromRow(r);});
+  } else {
+    for(let i=1;i<rows.length;i++){resultPaisa-=toPaisaFromRow(rows[i]);}
+  }
+  const radp=toRADP(resultPaisa);
+  landValue.textContent=formatRADP(radp);
+  landDecimal.textContent=(resultPaisa/PAISA_PER_ROPANI).toFixed(6);
+  landResult.style.display='block';
+}
+function toPaisaFromRow(row){
+  const inputs=row.querySelectorAll("input");
+  return toPaisa(+inputs[0].value,+inputs[1].value,+inputs[2].value,+inputs[3].value);
+}
+function resetLand(){
+  document.getElementById("landRows").innerHTML=`
+    <div class="unit-inputs land-row">
+      <input type="number" placeholder="Ropani">
+      <input type="number" placeholder="Aana">
+      <input type="number" placeholder="Daam">
+      <input type="number" placeholder="Paisa">
+    </div>
+    <div class="unit-inputs land-row">
+      <input type="number" placeholder="Ropani">
+      <input type="number" placeholder="Aana">
+      <input type="number" placeholder="Daam">
+      <input type="number" placeholder="Paisa">
+    </div>`;
+  landResult.style.display='none';
 }
 </script>
 </body>
 </html>
+
