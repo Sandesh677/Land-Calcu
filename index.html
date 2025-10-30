@@ -3,217 +3,755 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Nepal Land price Calculator & Unit Converter |</title>
+<title>Nepal Land Calculators — Eduwonka Style</title>
 <style>
-  :root {
-    --bg: #f4f7fb;
-    --card: #ffffff;
-    --accent: #2b7cff;
-    --muted: #6b7280;
+  :root{
+    --bg:#f8f7ff;
+    --card:#ffffff;
+    --accent:#5e2ced; /* Eduwonka purple */
+    --muted:#6b7280;
+    --glass: rgba(94,44,237,0.08);
     font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   }
-  html, body {
-    height: 100%;
-    margin: 0;
-    background: linear-gradient(180deg, #eef6ff 0%, var(--bg) 100%);
-    color: #111827;
+  html,body{height:100%;margin:0;background:linear-gradient(180deg,#fbf8ff 0%,var(--bg) 100%);color:#0f172a;}
+  .container{max-width:1200px;margin:26px auto;padding:20px;}
+  header{display:flex;gap:16px;align-items:center;margin-bottom:20px;}
+  .logo{width:68px;height:68px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,var(--accent),#8a63ff);box-shadow:0 8px 30px rgba(94,44,237,0.14);color:white;font-weight:800;font-size:20px;}
+  h1{font-size:20px;margin:0}
+  p.lead{margin:0;color:var(--muted);font-size:14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px;margin-top:18px;}
+  .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 8px 30px rgba(15,23,42,0.06);}
+  .card h2{margin:0 0 10px 0;color:var(--accent)}
+  label{font-size:13px;color:var(--muted);display:block;margin-top:8px}
+  input[type="number"], select, input[type="text"]{
+    width:100%;padding:10px;border-radius:8px;border:1px solid #eef0f6;font-size:14px;margin-top:6px;box-sizing:border-box;
   }
-  .container {
-    max-width: 1100px;
-    margin: 28px auto;
-    padding: 20px;
-  }
-  header {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  .logo {
-    width: 64px; height: 64px; border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, var(--accent), #66a3ff);
-    box-shadow: 0 6px 18px rgba(43,124,255,0.18);
-    color: white; font-weight: 700; font-size: 20px;
-  }
-  h1 { font-size: 20px; margin: 0 }
-  p.lead { margin: 0; color: var(--muted); font-size: 14px }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px,1fr)); gap: 18px; margin-top: 18px; }
-  .card { background: var(--card); border-radius: 12px; padding: 18px; box-shadow: 0 6px 20px rgba(15,23,42,0.06); }
-  .card h2 { margin: 0 0 8px 0; font-size: 16px }
-  label { font-size: 13px; color: var(--muted) }
-  input[type="number"], select {
-    width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #e6e9ef; font-size: 14px;
-    outline: none; box-sizing: border-box; margin-top: 6px;
-  }
-  .unit-inputs input { width: 70px; }
-  .btn {
-    background: var(--accent); color: white; border: none; padding: 10px 14px; border-radius: 10px;
-    cursor: pointer; font-weight: 600; box-shadow: 0 6px 18px rgba(43,124,255,0.16); margin-right: 6px;
-  }
-  .btn.ghost { background: transparent; color: var(--accent); border: 1px solid rgba(43,124,255,0.12); box-shadow: none; }
-  .result { margin-top: 12px; padding: 12px; border-radius: 10px; background: #fff; border: 1px solid #eef3ff }
-  .result .value { font-weight: 700; font-size: 18px }
-  .muted { color: var(--muted) }
-  .copy-btn { background: #0f172a; color: white; padding: 8px 10px; border-radius: 8px; border: none; cursor: pointer }
+  .unit-row{display:flex;gap:8px;flex-wrap:wrap}
+  .unit-row input{flex:0 0 72px}
+  .btn{background:var(--accent);color:white;border:none;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700;margin-right:8px;box-shadow:0 8px 22px rgba(94,44,237,0.12)}
+  .btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(94,44,237,0.12);box-shadow:none}
+  .small{padding:6px 10px;border-radius:8px;font-weight:600}
+  .result{margin-top:12px;padding:12px;border-radius:10px;background:linear-gradient(180deg,var(--glass),#fff);border:1px solid #f0edf9}
+  .result .value{font-weight:800;font-size:18px;color:#0f172a}
+  .muted{color:var(--muted)}
+  .tool-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .tab{padding:8px 12px;border-radius:10px;background:#fff;border:1px solid rgba(15,23,42,0.03);cursor:pointer}
+  .tab.active{background:linear-gradient(90deg,var(--accent),#7b59ff);color:white;box-shadow:0 8px 20px rgba(94,44,237,0.12)}
+  .section{display:none}
+  .section.active{display:block}
+  .controls-row{display:flex;gap:8px;align-items:center;margin-top:8px}
+  .row-actions{display:flex;gap:6px;margin-top:8px}
+  footer{margin-top:22px;text-align:center;color:var(--muted);font-size:13px}
+  @media (max-width:520px){.unit-row input{flex:0 0 48%;} .btn{width:100%;margin-bottom:8px}}
 </style>
 </head>
 <body>
 <div class="container">
   <header>
-    <div class="logo">LR</div>
+    <div class="logo">EW</div>
     <div>
-      <h1>Nepal Land Calculator & Unit Converter</h1>
-      <p class="lead">Calculate • Convert • Add/Subtract • Divide (Ropani · Aana · Daam · Paisa)</p>
+      <h1>Eduwonka — Nepal Land Calculators</h1>
+      <p class="lead">All-in-one single page: Hilly (Ropani), Terai (Bigha), All-unit price & converter</p>
     </div>
   </header>
 
-  <div class="grid">
+  <!-- Tabs to switch sections -->
+  <div class="card">
+    <div class="tool-tabs" id="tabs">
+      <div class="tab active" data-target="hilly">Hilly (Ropani)</div>
+      <div class="tab" data-target="terai">Terai (Bigha)</div>
+      <div class="tab" data-target="allunit">All-Unit Price</div>
+      <div class="tab" data-target="converter">Unit Converter</div>
+    </div>
 
-    <!-- PRICE CALCULATOR -->
-    <section class="card">
-      <h2>Land Price Calculator</h2>
-      <label>Price per Unit:</label>
-      <input id="priceRate" type="number" placeholder="e.g. 44000">
-      <select id="priceUnit">
-        <option value="ropani">Ropani</option>
-        <option value="aana">Aana</option>
-        <option value="daam">Daam</option>
-        <option value="paisa">Paisa</option>
-      </select>
+    <!-- HILLY SECTION -->
+    <div id="hilly" class="section active">
+      <h2>Hilly Region (Ropani System)</h2>
 
-      <div class="unit-inputs">
-        <input id="pc_ropani" type="number" placeholder="Ropani">
-        <input id="pc_aana" type="number" placeholder="Aana" max="15">
-        <input id="pc_daam" type="number" placeholder="Daam" max="3">
-        <input id="pc_paisa" type="number" placeholder="Paisa" max="3">
-      </div><br>
-      <button class="btn" onclick="calculatePrice()">Calculate</button>
-      <button class="btn ghost" onclick="resetPrice()">Reset</button>
-      <button class="copy-btn" onclick="copyPrice()">Copy</button>
-      <div id="priceResult" class="result" style="display:none">
-        <div class="muted">Total Price:</div>
-        <div class="value" id="priceValue">—</div>
-        <div class="muted">Decimal Ropani:</div>
-        <div id="priceRopani">—</div>
-      </div>
-    </section>
-
-    <!-- ADD/SUBTRACT -->
-    <section class="card">
-      <h2>Land Add / Subtract</h2>
-      <div id="landRows">
-        <div class="unit-inputs land-row">
-          <input type="number" placeholder="Ropani">
-          <input type="number" placeholder="Aana">
-          <input type="number" placeholder="Daam">
-          <input type="number" placeholder="Paisa">
+      <!-- Price Calculator -->
+      <div class="card" style="margin-bottom:12px">
+        <h2>Price Calculator (Ropani system)</h2>
+        <label>Price per Unit</label>
+        <div class="controls-row">
+          <input id="h_priceRate" type="number" placeholder="e.g. 44000">
+          <select id="h_priceUnit" style="width:140px">
+            <option value="ropani">Per Ropani</option>
+            <option value="aana">Per Aana</option>
+            <option value="daam">Per Daam</option>
+            <option value="paisa">Per Paisa</option>
+            <option value="sqm">Per m²</option>
+          </select>
         </div>
-        <div class="unit-inputs land-row">
-          <input type="number" placeholder="Ropani">
-          <input type="number" placeholder="Aana">
-          <input type="number" placeholder="Daam">
-          <input type="number" placeholder="Paisa">
+
+        <label style="margin-top:12px">Land (Ropani · Aana · Daam · Paisa)</label>
+        <div class="unit-row">
+          <input id="h_ropani" type="number" placeholder="Ropani">
+          <input id="h_aana" type="number" placeholder="Aana" max="15">
+          <input id="h_daam" type="number" placeholder="Daam" max="3">
+          <input id="h_paisa" type="number" placeholder="Paisa" max="3">
+        </div>
+
+        <div class="row-actions">
+          <button class="btn" onclick="calcPrice('h')">Calculate</button>
+          <button class="btn ghost" onclick="resetHillyPrice()">Reset</button>
+          <button class="small" onclick="copyText('h_priceResult')">Copy</button>
+        </div>
+
+        <div id="h_priceResult" class="result" style="display:none">
+          <div class="muted">Total Price:</div>
+          <div class="value" id="h_priceValue">—</div>
+          <div class="muted">Area (decimal Ropani):</div>
+          <div id="h_decimal">—</div>
         </div>
       </div>
-      <div style="margin-top:8px;">
-        <button class="btn" onclick="addRow()">+ Add More</button>
-        <button class="btn ghost" onclick="removeRow()">− Remove</button>
+
+      <!-- Add/Subtract (dynamic rows) -->
+      <div class="card" style="margin-bottom:12px">
+        <h2>Add / Subtract Land (Multiple rows)</h2>
+        <div id="h_rows">
+          <!-- initial two rows -->
+        </div>
+        <div style="margin-top:8px">
+          <button class="btn" onclick="h_addRow()">+ Add More</button>
+          <button class="btn ghost" onclick="h_removeRow()">− Remove</button>
+        </div>
+
+        <div style="margin-top:8px">
+          <label>Operation</label>
+          <select id="h_op">
+            <option value="add">Add (sum all rows)</option>
+            <option value="sub">Subtract (row1 - row2 - row3 ...)</option>
+          </select>
+        </div>
+
+        <div class="row-actions">
+          <button class="btn" onclick="h_computeRows()">Compute</button>
+          <button class="btn ghost" onclick="h_resetRows()">Reset</button>
+        </div>
+
+        <div id="h_rowsResult" class="result" style="display:none">
+          <div class="muted">Result (Ropani/Aana/Daam/Paisa):</div>
+          <div class="value" id="h_rowsValue">—</div>
+          <div class="muted">Decimal Ropani:</div>
+          <div id="h_rowsDecimal">—</div>
+        </div>
       </div>
-      <select id="operation">
-        <option value="add">Add</option>
-        <option value="sub">Subtract</option>
-      </select>
-      <button class="btn" onclick="landOperation()">Compute</button>
-      <button class="btn ghost" onclick="resetLand()">Reset</button>
-      <div id="landResult" class="result" style="display:none">
-        <div class="muted">Result:</div>
-        <div class="value" id="landValue">—</div>
-        <div class="muted">Decimal Ropani:</div>
-        <div id="landDecimal">—</div>
+
+      <!-- Division -->
+      <div class="card">
+        <h2>Division Calculator (Split Land)</h2>
+        <label>Total Land (Ropani · Aana · Daam · Paisa)</label>
+        <div class="unit-row">
+          <input id="h_div_r" type="number" placeholder="Ropani">
+          <input id="h_div_a" type="number" placeholder="Aana" max="15">
+          <input id="h_div_d" type="number" placeholder="Daam" max="3">
+          <input id="h_div_p" type="number" placeholder="Paisa" max="3">
+        </div>
+        <label>Divide into (number of parts)</label>
+        <input id="h_parts" type="number" min="1" placeholder="e.g. 2">
+        <div class="row-actions">
+          <button class="btn" onclick="h_divide()">Divide</button>
+          <button class="btn ghost" onclick="h_resetDivide()">Reset</button>
+        </div>
+
+        <div id="h_divResult" class="result" style="display:none">
+          <div class="muted">Each Portion:</div>
+          <div class="value" id="h_each">—</div>
+          <div class="muted">Decimal Ropani per Portion:</div>
+          <div id="h_eachDec">—</div>
+          <div class="muted" id="h_remainder" style="margin-top:8px"></div>
+        </div>
       </div>
-    </section>
+    </div>
+
+    <!-- TERAI SECTION -->
+    <div id="terai" class="section">
+      <h2>Terai Region (Bigha System)</h2>
+
+      <!-- Price Calculator -->
+      <div class="card" style="margin-bottom:12px">
+        <h2>Price Calculator (Bigha system)</h2>
+        <label>Price per Unit</label>
+        <div class="controls-row">
+          <input id="t_priceRate" type="number" placeholder="e.g. 1200000">
+          <select id="t_priceUnit" style="width:140px">
+            <option value="bigha">Per Bigha</option>
+            <option value="kattha">Per Kattha</option>
+            <option value="dhur">Per Dhur</option>
+            <option value="sqm">Per m²</option>
+          </select>
+        </div>
+
+        <label style="margin-top:12px">Land (Bigha · Kattha · Dhur)</label>
+        <div class="unit-row">
+          <input id="t_bigha" type="number" placeholder="Bigha">
+          <input id="t_kattha" type="number" placeholder="Kattha" max="19">
+          <input id="t_dhur" type="number" placeholder="Dhur" max="19">
+        </div>
+
+        <div class="row-actions">
+          <button class="btn" onclick="calcPrice('t')">Calculate</button>
+          <button class="btn ghost" onclick="resetTeraiPrice()">Reset</button>
+          <button class="small" onclick="copyText('t_priceResult')">Copy</button>
+        </div>
+
+        <div id="t_priceResult" class="result" style="display:none">
+          <div class="muted">Total Price:</div>
+          <div class="value" id="t_priceValue">—</div>
+          <div class="muted">Area (decimal Bigha):</div>
+          <div id="t_decimal">—</div>
+        </div>
+      </div>
+
+      <!-- Add/Subtract (dynamic rows) -->
+      <div class="card" style="margin-bottom:12px">
+        <h2>Add / Subtract Land (Multiple rows)</h2>
+        <div id="t_rows">
+          <!-- initial two rows -->
+        </div>
+        <div style="margin-top:8px">
+          <button class="btn" onclick="t_addRow()">+ Add More</button>
+          <button class="btn ghost" onclick="t_removeRow()">− Remove</button>
+        </div>
+
+        <div style="margin-top:8px">
+          <label>Operation</label>
+          <select id="t_op">
+            <option value="add">Add (sum all rows)</option>
+            <option value="sub">Subtract (row1 - row2 - row3 ...)</option>
+          </select>
+        </div>
+
+        <div class="row-actions">
+          <button class="btn" onclick="t_computeRows()">Compute</button>
+          <button class="btn ghost" onclick="t_resetRows()">Reset</button>
+        </div>
+
+        <div id="t_rowsResult" class="result" style="display:none">
+          <div class="muted">Result (Ropani/Aana/Daam/Paisa):</div>
+          <div class="value" id="t_rowsValue">—</div>
+          <div class="muted">Decimal Ropani:</div>
+          <div id="t_rowsDecimal">—</div>
+        </div>
+      </div>
+
+      <!-- Division -->
+      <div class="card">
+        <h2>Division Calculator (Split Land)</h2>
+        <label>Total Land (Bigha · Kattha · Dhur)</label>
+        <div class="unit-row">
+          <input id="t_div_b" type="number" placeholder="Bigha">
+          <input id="t_div_k" type="number" placeholder="Kattha">
+          <input id="t_div_d" type="number" placeholder="Dhur">
+        </div>
+        <label>Divide into (number of parts)</label>
+        <input id="t_parts" type="number" min="1" placeholder="e.g. 2">
+        <div class="row-actions">
+          <button class="btn" onclick="t_divide()">Divide</button>
+          <button class="btn ghost" onclick="t_resetDivide()">Reset</button>
+        </div>
+
+        <div id="t_divResult" class="result" style="display:none">
+          <div class="muted">Each Portion:</div>
+          <div class="value" id="t_each">—</div>
+          <div class="muted">Decimal Ropani per Portion:</div>
+          <div id="t_eachDec">—</div>
+          <div class="muted" id="t_remainder" style="margin-top:8px"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALL-UNIT PRICE -->
+    <div id="allunit" class="section">
+      <h2>All-Unit Land Price Calculator</h2>
+      <div class="card">
+        <label>Price per Unit</label>
+        <div class="controls-row">
+          <input id="a_priceRate" type="number" placeholder="Price (e.g. 100000)">
+          <select id="a_priceUnit" style="width:160px">
+            <option value="bigha">Bigha</option>
+            <option value="kattha">Kattha</option>
+            <option value="dhur">Dhur</option>
+            <option value="ropani">Ropani</option>
+            <option value="aana">Aana</option>
+            <option value="daam">Daam</option>
+            <option value="paisa">Paisa</option>
+            <option value="sqm">Square Meter (m²)</option>
+            <option value="sqft">Square Feet (ft²)</option>
+          </select>
+        </div>
+
+        <label style="margin-top:12px">Enter Land (you may use any units below)</label>
+        <div class="unit-row" style="margin-bottom:8px">
+          <input id="au_bigha" type="number" placeholder="Bigha">
+          <input id="au_kattha" type="number" placeholder="Kattha">
+          <input id="au_dhur" type="number" placeholder="Dhur">
+          <input id="au_ropani" type="number" placeholder="Ropani">
+          <input id="au_aana" type="number" placeholder="Aana">
+          <input id="au_daam" type="number" placeholder="Daam">
+          <input id="au_paisa" type="number" placeholder="Paisa">
+        </div>
+        <div style="margin-bottom:8px">
+          <input id="au_sqm" type="number" placeholder="Square meters (m²)">
+          <input id="au_sqft" type="number" placeholder="Square feet (ft²)">
+        </div>
+
+        <div class="row-actions">
+          <button class="btn" onclick="allunit_calc()">Calculate</button>
+          <button class="btn ghost" onclick="allunit_reset()">Reset</button>
+        </div>
+
+        <div id="au_result" class="result" style="display:none">
+          <div class="muted">Total Price:</div>
+          <div class="value" id="au_price">—</div>
+          <div class="muted">Area (m²):</div>
+          <div id="au_area">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONVERTER -->
+    <div id="converter" class="section">
+      <h2>Land Unit Converter</h2>
+      <div class="card">
+        <label>Value</label>
+        <input id="c_value" type="number" placeholder="Enter value" />
+        <label>Select Unit</label>
+        <select id="c_unit">
+          <option value="bigha">Bigha</option>
+          <option value="kattha">Kattha</option>
+          <option value="dhur">Dhur</option>
+          <option value="ropani">Ropani</option>
+          <option value="aana">Aana</option>
+          <option value="paisa">Paisa</option>
+          <option value="daam">Daam</option>
+          <option value="sqm">Square Meter (m²)</option>
+          <option value="sqft">Square Feet (ft²)</option>
+        </select>
+
+        <div class="row-actions">
+          <button class="btn" onclick="convertUnits()">Convert</button>
+          <button class="btn ghost" onclick="resetConverter()">Reset</button>
+        </div>
+
+        <div id="c_result" class="result" style="display:none"></div>
+      </div>
+    </div>
+
   </div>
+
+  <footer>© 2025 Eduwonka — Nepal Land Calculator & Converter</footer>
 </div>
 
 <script>
-/* --- Land Calculator Logic --- */
-const AANA_PER_ROPANI=16, DAAM_PER_AANA=4, PAISA_PER_DAAM=4;
-const PAISA_PER_ROPANI=AANA_PER_ROPANI*DAAM_PER_AANA*PAISA_PER_DAAM;
-function toPaisa(r,a,d,p){return (r||0)*PAISA_PER_ROPANI+(a||0)*DAAM_PER_AANA*PAISA_PER_DAAM+(d||0)*PAISA_PER_DAAM+(p||0);}
-function toRADP(paisa){const sign=paisa<0?-1:1;let p=Math.abs(paisa);const r=Math.floor(p/PAISA_PER_ROPANI);p%=PAISA_PER_ROPANI;const a=Math.floor(p/(DAAM_PER_AANA*PAISA_PER_DAAM));p%=(DAAM_PER_AANA*PAISA_PER_DAAM);const d=Math.floor(p/PAISA_PER_DAAM);const ps=p%PAISA_PER_DAAM;return{sign,r,a,d,p:ps};}
-function formatRADP(o){return`${o.sign<0?'-':''}${o.r} Ropani ${o.a} Aana ${o.d} Daam ${o.p} Paisa`;}
+/* ---------------------------
+   Conversion constants (m²)
+   ---------------------------
+   Source (your supplied values):
+   1 Bigha = 6772.63 m²
+   1 Kattha = 338.63 m²
+   1 Dhur = 16.93 m²
+   1 Ropani = 508.72 m²
+   1 Aana = 31.80 m²
+   1 Paisa = 7.95 m²
+   1 Daam = 1.99 m²
+   --------------------------- */
+const CONV = {
+  bigha: 6772.63,
+  kattha: 338.63,
+  dhur: 16.93,
+  ropani: 508.72,
+  aana: 31.80,
+  paisa: 7.95,
+  daam: 1.99,
+  sqm: 1,
+  sqft: 0.092903 /* 1 sqft = 0.092903 m² (used when converting sqft -> m²) */
+};
 
-/* --- Updated Price Calculation --- */
-function calculatePrice(){
-  const rate=parseFloat(priceRate.value);
-  const unit=priceUnit.value;
-  if(!rate){alert("Enter price per unit.");return;}
-  const paisa=toPaisa(+pc_ropani.value,+pc_aana.value,+pc_daam.value,+pc_paisa.value);
-  const ropaniDec=paisa/PAISA_PER_ROPANI;
+/* Helper: convert R/A/D/P integer breakdown to m² via paisa as smallest unit:
+   We will use direct m² conversions rather than integer chaining when possible.
+   But for formatting into Ropani/Aana/Daam/Paisa we convert via Paisa unit count:
+   1 Paisa = CONV.paisa (7.95 m²)
+*/
+const PAISA_M2 = CONV.paisa;
+const AANA_PER_ROPANI = 16;
+const DAAM_PER_AANA = 4;
+const PAISA_PER_DAAM = 4;
+const PAISA_PER_ROPANI = AANA_PER_ROPANI * DAAM_PER_AANA * PAISA_PER_DAAM; // 16*4*4 = 256
 
-  let unitToRopani=1;
-  if(unit==="aana")unitToRopani=1/16;
-  else if(unit==="daam")unitToRopani=1/256;
-  else if(unit==="paisa")unitToRopani=1/64;
-
-  const total=rate*(ropaniDec/unitToRopani);
-  priceValue.textContent="₨ "+total.toLocaleString(undefined,{maximumFractionDigits:2});
-  priceRopani.textContent=ropaniDec.toFixed(6);
-  priceResult.style.display='block';
+/* Utility: convert R/A/D/P inputs to area m² */
+function radpToM2(r,a,d,p){
+  const m2 = (Number(r)||0)*CONV.ropani + (Number(a)||0)*CONV.aana + (Number(d)||0)*CONV.daam + (Number(p)||0)*CONV.paisa;
+  return m2;
 }
-function resetPrice(){['priceRate','pc_ropani','pc_aana','pc_daam','pc_paisa'].forEach(id=>document.getElementById(id)?.value='');priceResult.style.display='none';}
-function copyPrice(){if(priceResult.style.display==='none'){alert("No result to copy");return;}navigator.clipboard.writeText("Price: "+priceValue.textContent+" | Ropani: "+priceRopani.textContent);alert("Copied!");}
 
-/* --- Updated Add/Subtract with Dynamic Rows --- */
-function addRow(){
-  const container=document.getElementById("landRows");
-  const div=document.createElement("div");
-  div.className="unit-inputs land-row";
-  div.innerHTML=`<input type="number" placeholder="Ropani">
-                 <input type="number" placeholder="Aana">
-                 <input type="number" placeholder="Daam">
-                 <input type="number" placeholder="Paisa">`;
+/* Utility: convert B/K/D (Bigha/Kattha/Dhur) to m² */
+function bkdToM2(b,k,d){
+  return (Number(b)||0)*CONV.bigha + (Number(k)||0)*CONV.kattha + (Number(d)||0)*CONV.dhur;
+}
+
+/* Utility: convert m² to paisa count (can be fractional), then to integer RADP breakdown */
+function m2ToPaisaCount(m2){
+  return m2 / PAISA_M2;
+}
+function paisaCountToRADP(paisaCount){ // paisaCount may be fractional
+  const sign = paisaCount < 0 ? -1 : 1;
+  let p = Math.abs(paisaCount);
+  // Round down to integer paisa units for components
+  const paisaInt = Math.floor(p + 1e-9); // small epsilon
+  const r = Math.floor(paisaInt / PAISA_PER_ROPANI);
+  let rem = paisaInt % PAISA_PER_ROPANI;
+  const a = Math.floor(rem / (DAAM_PER_AANA * PAISA_PER_DAAM));
+  rem = rem % (DAAM_PER_AANA * PAISA_PER_DAAM);
+  const d = Math.floor(rem / PAISA_PER_DAAM);
+  const ps = rem % PAISA_PER_DAAM;
+  return { sign, r, a, d, p: ps };
+}
+function formatRADP(obj){
+  const s = obj.sign < 0 ? '-' : '';
+  return `${s}${obj.r} Ropani ${obj.a} Aana ${obj.d} Daam ${obj.p} Paisa`;
+}
+
+/* Shared price calculation:
+   mode = 'h' (hilly), 't' (terai), or 'a' (allunit)
+   For 'h' & 't' we read their specific input groups.
+   Strategy: compute total area in m², then convert to selected price-unit and multiply by rate.
+*/
+function calcPrice(mode){
+  let areaM2 = 0;
+  let rate, unit;
+  if(mode === 'h'){
+    const r = +document.getElementById('h_ropani').value || 0;
+    const a = +document.getElementById('h_aana').value || 0;
+    const d = +document.getElementById('h_daam').value || 0;
+    const p = +document.getElementById('h_paisa').value || 0;
+    areaM2 = radpToM2(r,a,d,p);
+    rate = Number(document.getElementById('h_priceRate').value);
+    unit = document.getElementById('h_priceUnit').value;
+  } else if(mode === 't'){
+    const b = +document.getElementById('t_bigha').value || 0;
+    const k = +document.getElementById('t_kattha').value || 0;
+    const d = +document.getElementById('t_dhur').value || 0;
+    areaM2 = bkdToM2(b,k,d);
+    rate = Number(document.getElementById('t_priceRate').value);
+    unit = document.getElementById('t_priceUnit').value;
+  } else {
+    return;
+  }
+
+  if(!rate || rate <= 0){ alert('Enter a valid price rate'); return; }
+  // Determine unit area in m² for selected unit
+  let unitAreaM2;
+  if(unit === 'sqm') unitAreaM2 = CONV.sqm;
+  else if(unit === 'ropani') unitAreaM2 = CONV.ropani;
+  else if(unit === 'aana') unitAreaM2 = CONV.aana;
+  else if(unit === 'daam') unitAreaM2 = CONV.daam;
+  else if(unit === 'paisa') unitAreaM2 = CONV.paisa;
+  else if(unit === 'bigha') unitAreaM2 = CONV.bigha;
+  else if(unit === 'kattha') unitAreaM2 = CONV.kattha;
+  else if(unit === 'dhur') unitAreaM2 = CONV.dhur;
+  else unitAreaM2 = CONV.ropani;
+
+  const unitsCount = areaM2 / unitAreaM2;
+  const totalPrice = unitsCount * rate;
+
+  if(mode === 'h'){
+    document.getElementById('h_priceValue').textContent = '₨ ' + totalPrice.toLocaleString(undefined,{maximumFractionDigits:2});
+    document.getElementById('h_decimal').textContent = (areaM2 / CONV.ropani).toFixed(6) + ' Ropani';
+    document.getElementById('h_priceResult').style.display = 'block';
+  } else {
+    document.getElementById('t_priceValue').textContent = '₨ ' + totalPrice.toLocaleString(undefined,{maximumFractionDigits:2});
+    document.getElementById('t_decimal').textContent = (areaM2 / CONV.bigha).toFixed(6) + ' Bigha';
+    document.getElementById('t_priceResult').style.display = 'block';
+  }
+}
+
+/* Reset helpers */
+function resetHillyPrice(){
+  ['h_priceRate','h_ropani','h_aana','h_daam','h_paisa'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('h_priceResult').style.display='none';
+}
+function resetTeraiPrice(){
+  ['t_priceRate','t_bigha','t_kattha','t_dhur'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('t_priceResult').style.display='none';
+}
+
+/* COPY helper */
+function copyText(resultId){
+  const el = document.getElementById(resultId);
+  if(!el || el.style.display === 'none'){ alert('No result to copy'); return; }
+  const text = el.innerText || el.textContent;
+  navigator.clipboard?.writeText(text).then(()=>alert('Copied!'), ()=>alert('Copy failed'));
+}
+
+/* ---------------------------
+   HILLY dynamic rows
+   --------------------------- */
+function h_addRow(){
+  const container = document.getElementById('h_rows');
+  const div = document.createElement('div');
+  div.className = 'unit-row h-row';
+  div.style.marginTop = '8px';
+  div.innerHTML = `
+    <input type="number" placeholder="Ropani">
+    <input type="number" placeholder="Aana" max="15">
+    <input type="number" placeholder="Daam" max="3">
+    <input type="number" placeholder="Paisa" max="3">`;
   container.appendChild(div);
 }
-function removeRow(){
-  const rows=document.querySelectorAll(".land-row");
-  if(rows.length>2)rows[rows.length-1].remove();
+function h_removeRow(){
+  const rows = document.querySelectorAll('#h_rows .h-row');
+  if(rows.length > 2) rows[rows.length-1].remove();
 }
-function landOperation(){
-  const op=document.getElementById("operation").value;
-  const rows=document.querySelectorAll(".land-row");
-  let resultPaisa=op==="add"?0:toPaisaFromRow(rows[0]);
-  if(op==="add"){
-    rows.forEach(r=>{resultPaisa+=toPaisaFromRow(r);});
-  } else {
-    for(let i=1;i<rows.length;i++){resultPaisa-=toPaisaFromRow(rows[i]);}
+function h_resetRows(){
+  const container = document.getElementById('h_rows');
+  container.innerHTML = '';
+  // create two blank rows
+  for(let i=0;i<2;i++){
+    const div = document.createElement('div'); div.className='unit-row h-row'; div.style.marginTop='8px';
+    div.innerHTML = `<input type="number" placeholder="Ropani">
+                     <input type="number" placeholder="Aana" max="15">
+                     <input type="number" placeholder="Daam" max="3">
+                     <input type="number" placeholder="Paisa" max="3">`;
+    container.appendChild(div);
   }
-  const radp=toRADP(resultPaisa);
-  landValue.textContent=formatRADP(radp);
-  landDecimal.textContent=(resultPaisa/PAISA_PER_ROPANI).toFixed(6);
-  landResult.style.display='block';
+  document.getElementById('h_rowsResult').style.display='none';
 }
-function toPaisaFromRow(row){
-  const inputs=row.querySelectorAll("input");
-  return toPaisa(+inputs[0].value,+inputs[1].value,+inputs[2].value,+inputs[3].value);
+function h_computeRows(){
+  const rows = document.querySelectorAll('#h_rows .h-row');
+  if(rows.length === 0) { alert('Add at least one row'); return; }
+  const op = document.getElementById('h_op').value;
+  let totalM2 = op === 'add' ? 0 : null; // if subtract, start with first row
+  rows.forEach((row, idx) => {
+    const inputs = row.querySelectorAll('input');
+    const r = +inputs[0].value || 0;
+    const a = +inputs[1].value || 0;
+    const d = +inputs[2].value || 0;
+    const p = +inputs[3].value || 0;
+    const m2 = radpToM2(r,a,d,p);
+    if(op === 'add') totalM2 += m2;
+    else {
+      if(idx === 0) totalM2 = m2;
+      else totalM2 -= m2;
+    }
+  });
+  displayRowsResult('h', totalM2);
 }
-function resetLand(){
-  document.getElementById("landRows").innerHTML=`
-    <div class="unit-inputs land-row">
-      <input type="number" placeholder="Ropani">
-      <input type="number" placeholder="Aana">
-      <input type="number" placeholder="Daam">
-      <input type="number" placeholder="Paisa">
-    </div>
-    <div class="unit-inputs land-row">
-      <input type="number" placeholder="Ropani">
-      <input type="number" placeholder="Aana">
-      <input type="number" placeholder="Daam">
-      <input type="number" placeholder="Paisa">
-    </div>`;
-  landResult.style.display='none';
+function displayRowsResult(prefix, m2){
+  // convert to paisa count (could be negative)
+  const paisaCount = m2ToPaisaCount(m2);
+  const radp = paisaCountToRADP(paisaCount);
+  const formatted = formatRADP(radp);
+  document.getElementById(prefix + '_rowsValue').textContent = formatted;
+  document.getElementById(prefix + '_rowsDecimal').textContent = (m2 / CONV.ropani).toFixed(6) + ' Ropani';
+  document.getElementById(prefix + '_rowsResult').style.display = 'block';
 }
+
+/* Division for Hilly */
+function h_divide(){
+  const r = +document.getElementById('h_div_r').value || 0;
+  const a = +document.getElementById('h_div_a').value || 0;
+  const d = +document.getElementById('h_div_d').value || 0;
+  const p = +document.getElementById('h_div_p').value || 0;
+  const parts = Math.max(1, parseInt(document.getElementById('h_parts').value || 0));
+  if(parts < 1){ alert('Enter valid number of parts'); return; }
+  const totalM2 = radpToM2(r,a,d,p);
+  const perM2 = Math.floor((totalM2 / parts) * 1000000) / 1000000; // keep precision
+  const remainderM2 = totalM2 - perM2 * parts;
+  // Convert perM2 and remainder to RADP via paisa method
+  const perPaisa = m2ToPaisaCount(perM2);
+  const remainderPaisa = m2ToPaisaCount(remainderM2);
+  document.getElementById('h_each').textContent = formatRADP(paisaCountToRADP(perPaisa));
+  document.getElementById('h_eachDec').textContent = (perM2 / CONV.ropani).toFixed(6) + ' Ropani';
+  document.getElementById('h_remainder').textContent = remainderM2 > 1e-9 ? 'Remainder: ' + formatRADP(paisaCountToRADP(remainderPaisa)) : '';
+  document.getElementById('h_divResult').style.display = 'block';
+}
+function h_resetDivide(){
+  ['h_div_r','h_div_a','h_div_d','h_div_p','h_parts'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('h_divResult').style.display='none';
+}
+
+/* ---------------------------
+   TERAI dynamic rows
+   --------------------------- */
+function t_addRow(){
+  const container = document.getElementById('t_rows');
+  const div = document.createElement('div');
+  div.className = 'unit-row t-row';
+  div.style.marginTop = '8px';
+  div.innerHTML = `
+    <input type="number" placeholder="Bigha">
+    <input type="number" placeholder="Kattha" max="19">
+    <input type="number" placeholder="Dhur" max="19">`;
+  container.appendChild(div);
+}
+function t_removeRow(){
+  const rows = document.querySelectorAll('#t_rows .t-row');
+  if(rows.length > 2) rows[rows.length-1].remove();
+}
+function t_resetRows(){
+  const container = document.getElementById('t_rows');
+  container.innerHTML = '';
+  for(let i=0;i<2;i++){
+    const div = document.createElement('div'); div.className='unit-row t-row'; div.style.marginTop='8px';
+    div.innerHTML = `<input type="number" placeholder="Bigha">
+                     <input type="number" placeholder="Kattha" max="19">
+                     <input type="number" placeholder="Dhur" max="19">`;
+    container.appendChild(div);
+  }
+  document.getElementById('t_rowsResult').style.display='none';
+}
+function t_computeRows(){
+  const rows = document.querySelectorAll('#t_rows .t-row');
+  if(rows.length === 0) { alert('Add at least one row'); return; }
+  const op = document.getElementById('t_op').value;
+  let totalM2 = op === 'add' ? 0 : null;
+  rows.forEach((row, idx) => {
+    const inputs = row.querySelectorAll('input');
+    const b = +inputs[0].value || 0;
+    const k = +inputs[1].value || 0;
+    const d = +inputs[2].value || 0;
+    const m2 = bkdToM2(b,k,d);
+    if(op === 'add') totalM2 += m2;
+    else {
+      if(idx === 0) totalM2 = m2;
+      else totalM2 -= m2;
+    }
+  });
+  // display in Ropani units for consistent user view
+  displayRowsResult('t', totalM2);
+}
+
+/* Division for Terai */
+function t_divide(){
+  const b = +document.getElementById('t_div_b').value || 0;
+  const k = +document.getElementById('t_div_k').value || 0;
+  const d = +document.getElementById('t_div_d').value || 0;
+  const parts = Math.max(1, parseInt(document.getElementById('t_parts').value || 0));
+  if(parts < 1){ alert('Enter valid number of parts'); return; }
+  const totalM2 = bkdToM2(b,k,d);
+  const perM2 = Math.floor((totalM2 / parts) * 1000000) / 1000000;
+  const remainderM2 = totalM2 - perM2 * parts;
+  document.getElementById('t_each').textContent = formatRADP(paisaCountToRADP(m2ToPaisaCount(perM2)));
+  document.getElementById('t_eachDec').textContent = (perM2 / CONV.ropani).toFixed(6) + ' Ropani';
+  document.getElementById('t_remainder').textContent = remainderM2 > 1e-9 ? 'Remainder: ' + formatRADP(paisaCountToRADP(m2ToPaisaCount(remainderM2))) : '';
+  document.getElementById('t_divResult').style.display='block';
+}
+function t_resetDivide(){
+  ['t_div_b','t_div_k','t_div_d','t_parts'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('t_divResult').style.display='none';
+}
+
+/* ---------------------------
+   ALL-UNIT Calculator
+   --------------------------- */
+function allunit_calc(){
+  const rate = Number(document.getElementById('a_priceRate').value);
+  const unit = document.getElementById('a_priceUnit').value;
+  if(!rate || rate <= 0) { alert('Enter valid rate'); return; }
+  // gather all area inputs
+  let areaM2 = 0;
+  areaM2 += (Number(document.getElementById('au_bigha').value) || 0) * CONV.bigha;
+  areaM2 += (Number(document.getElementById('au_kattha').value) || 0) * CONV.kattha;
+  areaM2 += (Number(document.getElementById('au_dhur').value) || 0) * CONV.dhur;
+  areaM2 += (Number(document.getElementById('au_ropani').value) || 0) * CONV.ropani;
+  areaM2 += (Number(document.getElementById('au_aana').value) || 0) * CONV.aana;
+  areaM2 += (Number(document.getElementById('au_daam').value) || 0) * CONV.daam;
+  areaM2 += (Number(document.getElementById('au_paisa').value) || 0) * CONV.paisa;
+  areaM2 += (Number(document.getElementById('au_sqm').value) || 0);
+  const sqft = Number(document.getElementById('au_sqft').value) || 0;
+  areaM2 += sqft * CONV.sqft * 1 / CONV.sqft * CONV.sqft; // simple add sqft -> m2 below
+  // (the previous line is intentionally simple: convert sqft to m2)
+  areaM2 += sqft * CONV.sqft;
+
+  // compute price by converting unit to area
+  let unitArea = CONV[unit] || (unit === 'sqft' ? CONV.sqft : CONV.ropani);
+  if(unit === 'sqft') unitArea = CONV.sqft;
+  const countUnits = areaM2 / unitArea;
+  const totalPrice = countUnits * rate;
+
+  document.getElementById('au_price').textContent = '₨ ' + totalPrice.toLocaleString(undefined,{maximumFractionDigits:2});
+  document.getElementById('au_area').textContent = areaM2.toFixed(3) + ' m²';
+  document.getElementById('au_result').style.display = 'block';
+}
+function allunit_reset(){
+  ['a_priceRate','au_bigha','au_kattha','au_dhur','au_ropani','au_aana','au_daam','au_paisa','au_sqm','au_sqft'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('au_result').style.display='none';
+}
+
+/* ---------------------------
+   CONVERTER
+   --------------------------- */
+function convertUnits(){
+  const val = Number(document.getElementById('c_value').value);
+  const unit = document.getElementById('c_unit').value;
+  if(isNaN(val) || val <= 0){ alert('Enter valid value'); return; }
+  // convert input to m²
+  let m2 = 0;
+  if(unit === 'sqm') m2 = val;
+  else if(unit === 'sqft') m2 = val * CONV.sqft;
+  else m2 = val * (CONV[unit] || 1);
+
+  const sqft = m2 / CONV.sqft;
+  const results = {
+    bigha: (m2 / CONV.bigha),
+    kattha: (m2 / CONV.kattha),
+    dhur: (m2 / CONV.dhur),
+    ropani: (m2 / CONV.ropani),
+    aana: (m2 / CONV.aana),
+    paisa: (m2 / CONV.paisa),
+    daam: (m2 / CONV.daam),
+    sqm: m2,
+    sqft: sqft
+  };
+
+  const out = document.getElementById('c_result');
+  out.innerHTML = `
+    <p><b>${val} ${unit === 'sqm' ? 'm²' : unit === 'sqft' ? 'ft²' : unit}</b> equals:</p><hr>
+    <p>🌾 <b>${results.bigha.toFixed(6)}</b> Bigha</p>
+    <p>🌾 <b>${results.kattha.toFixed(6)}</b> Kattha</p>
+    <p>🌾 <b>${results.dhur.toFixed(6)}</b> Dhur</p>
+    <p>⛰️ <b>${results.ropani.toFixed(6)}</b> Ropani</p>
+    <p>⛰️ <b>${results.aana.toFixed(6)}</b> Aana</p>
+    <p>⛰️ <b>${results.paisa.toFixed(6)}</b> Paisa</p>
+    <p>⛰️ <b>${results.daam.toFixed(6)}</b> Daam</p>
+    <hr>
+    <p>📏 <b>${results.sqm.toFixed(3)}</b> m²</p>
+    <p>📐 <b>${results.sqft.toFixed(3)}</b> ft²</p>
+  `;
+  out.style.display = 'block';
+}
+function resetConverter(){
+  ['c_value','c_unit'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('c_result').style.display='none';
+}
+
+/* ---------------------------
+   Page initialization & tabs
+   --------------------------- */
+function init(){
+  // init hilly rows
+  h_resetRows();
+  // init terai rows
+  t_resetRows();
+
+  // tab clicks
+  document.querySelectorAll('.tab').forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+      tab.classList.add('active');
+      const target = tab.getAttribute('data-target');
+      document.querySelectorAll('.section').forEach(sec=>sec.classList.remove('active'));
+      document.getElementById(target).classList.add('active');
+      // scroll to top of container when switching
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  });
+}
+init();
+
+/* Safety: small input validations could be extended if needed */
 </script>
 </body>
 </html>
