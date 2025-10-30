@@ -78,8 +78,8 @@
           <select id="h_priceUnit" style="width:140px">
             <option value="ropani">Per Ropani</option>
             <option value="aana">Per Aana</option>
-            <option value="daam">Per Daam</option>
-            <option value="paisa">Per Paisa</option>
+            <option value="daam">Per Paisa</option>
+            <option value="paisa">Per Daam</option>
             <option value="sqm">Per m²</option>
           </select>
         </div>
@@ -88,8 +88,8 @@
         <div class="unit-row">
           <input id="h_ropani" type="number" placeholder="Ropani">
           <input id="h_aana" type="number" placeholder="Aana" max="15">
-          <input id="h_daam" type="number" placeholder="Daam" max="3">
           <input id="h_paisa" type="number" placeholder="Paisa" max="3">
+          <input id="h_daam" type="number" placeholder="Daam" max="3">
         </div>
 
         <div class="row-actions">
@@ -131,7 +131,7 @@
         </div>
 
         <div id="h_rowsResult" class="result" style="display:none">
-          <div class="muted">Result (Ropani/Aana/Daam/Paisa):</div>
+          <div class="muted">Result (Ropani/Aana/Paisa/Daam):</div>
           <div class="value" id="h_rowsValue">—</div>
           <div class="muted">Decimal Ropani:</div>
           <div id="h_rowsDecimal">—</div>
@@ -141,12 +141,12 @@
       <!-- Division -->
       <div class="card">
         <h2>Division Calculator (Split Land)</h2>
-        <label>Total Land (Ropani · Aana · Daam · Paisa)</label>
+        <label>Total Land (Ropani · Aana · Paisa · Daam)</label>
         <div class="unit-row">
           <input id="h_div_r" type="number" placeholder="Ropani">
           <input id="h_div_a" type="number" placeholder="Aana" max="15">
-          <input id="h_div_d" type="number" placeholder="Daam" max="3">
-          <input id="h_div_p" type="number" placeholder="Paisa" max="3">
+          <input id="h_div_d" type="number" placeholder="Paisa" max="3">
+          <input id="h_div_p" type="number" placeholder="Daam" max="3">
         </div>
         <label>Divide into (number of parts)</label>
         <input id="h_parts" type="number" min="1" placeholder="e.g. 2">
@@ -275,8 +275,8 @@
             <option value="dhur">Dhur</option>
             <option value="ropani">Ropani</option>
             <option value="aana">Aana</option>
-            <option value="daam">Daam</option>
-            <option value="paisa">Paisa</option>
+            <option value="daam">Paisa</option>
+            <option value="paisa">Daam</option>
             <option value="sqm">Square Meter (m²)</option>
             <option value="sqft">Square Feet (ft²)</option>
           </select>
@@ -289,8 +289,8 @@
           <input id="au_dhur" type="number" placeholder="Dhur">
           <input id="au_ropani" type="number" placeholder="Ropani">
           <input id="au_aana" type="number" placeholder="Aana">
-          <input id="au_daam" type="number" placeholder="Daam">
           <input id="au_paisa" type="number" placeholder="Paisa">
+          <input id="au_daam" type="number" placeholder="Daam">
         </div>
         <div style="margin-bottom:8px">
           <input id="au_sqm" type="number" placeholder="Square meters (m²)">
@@ -369,18 +369,18 @@ const CONV = {
   sqft: 0.092903 /* 1 sqft = 0.092903 m² (used when converting sqft -> m²) */
 };
 
-/* Helper: convert R/A/D/P integer breakdown to m² via paisa as smallest unit:
+/* Helper: convert R/A/D/P integer breakdown to m² via daam as smallest unit:
    We will use direct m² conversions rather than integer chaining when possible.
-   But for formatting into Ropani/Aana/Daam/Paisa we convert via Paisa unit count:
-   1 Paisa = CONV.paisa (7.95 m²)
+   But for formatting into Ropani/Aana/Paisa/daam we convert via daam unit count:
+   1 Daam = CONV.daam (1.99 m²)
 */
 const PAISA_M2 = CONV.paisa;
 const AANA_PER_ROPANI = 16;
-const DAAM_PER_AANA = 4;
-const PAISA_PER_DAAM = 4;
-const PAISA_PER_ROPANI = AANA_PER_ROPANI * DAAM_PER_AANA * PAISA_PER_DAAM; // 16*4*4 = 256
+const PAISA_PER_AANA = 4;
+const DAAM_PER_PAISA = 4;
+const DAAM_PER_ROPANI = AANA_PER_ROPANI * PAISA_PER_AANA * DAAM_PER_PAISA; // 16*4*4 = 256
 
-/* Utility: convert R/A/D/P inputs to area m² */
+/* Utility: convert R/A/P/D inputs to area m² */
 function radpToM2(r,a,d,p){
   const m2 = (Number(r)||0)*CONV.ropani + (Number(a)||0)*CONV.aana + (Number(d)||0)*CONV.daam + (Number(p)||0)*CONV.paisa;
   return m2;
