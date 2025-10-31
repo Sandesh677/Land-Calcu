@@ -3,47 +3,33 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Nepal Land Calculators — Eduwonka Style (Corrected: Daam smallest)</title>
+<title>Eduwonka — Nepal Land Calculators (Corrected)</title>
 <style>
   :root{
-    --bg:#f8f7ff;
-    --card:#ffffff;
-    --accent:#5e2ced; /* Eduwonka purple */
-    --muted:#6b7280;
-    --glass: rgba(94,44,237,0.08);
+    --bg:#f8f7ff; --card:#fff; --accent:#5e2ced; --muted:#6b7280;
     font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   }
-  html,body{height:100%;margin:0;background:linear-gradient(180deg,#fbf8ff 0%,var(--bg) 100%);color:#0f172a;}
-  .container{max-width:1200px;margin:26px auto;padding:20px;}
-  header{display:flex;gap:16px;align-items:center;margin-bottom:20px;}
-  .logo{width:68px;height:68px;border-radius:12px;display:flex;align-items:center;justify-content:center;
-    background:linear-gradient(135deg,var(--accent),#8a63ff);box-shadow:0 8px 30px rgba(94,44,237,0.14);color:white;font-weight:800;font-size:20px;}
-  h1{font-size:20px;margin:0}
-  p.lead{margin:0;color:var(--muted);font-size:14px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px;margin-top:18px;}
-  .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 8px 30px rgba(15,23,42,0.06);}
-  .card h2{margin:0 0 10px 0;color:var(--accent)}
-  label{font-size:13px;color:var(--muted);display:block;margin-top:8px}
-  input[type="number"], select, input[type="text"]{
-    width:100%;padding:10px;border-radius:8px;border:1px solid #eef0f6;font-size:14px;margin-top:6px;box-sizing:border-box;
-  }
-  .unit-row{display:flex;gap:8px;flex-wrap:wrap}
-  .unit-row input{flex:0 0 72px}
-  .btn{background:var(--accent);color:white;border:none;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700;margin-right:8px;box-shadow:0 8px 22px rgba(94,44,237,0.12)}
-  .btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(94,44,237,0.12);box-shadow:none}
-  .small{padding:6px 10px;border-radius:8px;font-weight:600}
-  .result{margin-top:12px;padding:12px;border-radius:10px;background:linear-gradient(180deg,var(--glass),#fff);border:1px solid #f0edf9}
-  .result .value{font-weight:800;font-size:18px;color:#0f172a}
-  .muted{color:var(--muted)}
-  .tool-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-  .tab{padding:8px 12px;border-radius:10px;background:#fff;border:1px solid rgba(15,23,42,0.03);cursor:pointer}
-  .tab.active{background:linear-gradient(90deg,var(--accent),#7b59ff);color:white;box-shadow:0 8px 20px rgba(94,44,237,0.12)}
-  .section{display:none}
-  .section.active{display:block}
-  .controls-row{display:flex;gap:8px;align-items:center;margin-top:8px}
-  .row-actions{display:flex;gap:6px;margin-top:8px}
-  footer{margin-top:22px;text-align:center;color:var(--muted);font-size:13px}
-  @media (max-width:520px){.unit-row input{flex:0 0 48%;} .btn{width:100%;margin-bottom:8px}}
+  body{margin:0;background:linear-gradient(180deg,#fbf8ff 0%,var(--bg) 100%);color:#071129}
+  .container{max-width:1100px;margin:28px auto;padding:18px}
+  header{display:flex;gap:14px;align-items:center}
+  .logo{width:64px;height:64px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),#8a63ff);color:#fff;font-weight:800}
+  h1{margin:0;font-size:20px}
+  p.lead{margin:0;color:var(--muted);font-size:13px}
+  .card{background:var(--card);border-radius:12px;padding:16px;margin-top:12px;box-shadow:0 8px 24px rgba(10,12,20,0.06)}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .tab{padding:8px 12px;border-radius:10px;background:#fff;border:1px solid rgba(10,12,20,0.04);cursor:pointer}
+  .tab.active{background:linear-gradient(90deg,var(--accent),#7b59ff);color:#fff}
+  label{display:block;color:var(--muted);font-size:13px;margin-top:10px}
+  input[type="number"], select{padding:8px;border-radius:8px;border:1px solid #e9eefb;width:100%;box-sizing:border-box;margin-top:6px}
+  .row{display:flex;gap:8px;flex-wrap:wrap}
+  .row input{flex:0 0 82px}
+  .controls{display:flex;gap:8px;margin-top:10px}
+  .btn{background:var(--accent);color:#fff;padding:9px 12px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+  .btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(94,44,237,0.12)}
+  .result{margin-top:12px;padding:12px;border-radius:10px;background:#fbf8ff;border:1px solid #f0e9ff}
+  .value{font-weight:800;font-size:16px}
+  footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+  @media (max-width:540px){.row input{flex:1 1 48%}}
 </style>
 </head>
 <body>
@@ -52,30 +38,29 @@
     <div class="logo">EW</div>
     <div>
       <h1>Eduwonka — Nepal Land Calculators</h1>
-      <p class="lead">All-in-one single page: Hilly (Ropani), Terai (Bigha), All-unit price & converter</p>
+      <p class="lead">Hilly (Ropani) & Terai (Bigha) — Fixed unit logic (Daam smallest, Terai outputs in Bigha/Kattha/Dhur)</p>
     </div>
   </header>
 
-  <!-- Tabs to switch sections -->
   <div class="card">
-    <div class="tool-tabs" id="tabs">
+    <div class="tabs">
       <div class="tab active" data-target="hilly">Hilly (Ropani)</div>
       <div class="tab" data-target="terai">Terai (Bigha)</div>
       <div class="tab" data-target="allunit">All-Unit Price</div>
       <div class="tab" data-target="converter">Unit Converter</div>
     </div>
 
-    <!-- HILLY SECTION -->
-    <div id="hilly" class="section active">
-      <h2>Hilly Region (Ropani System)</h2>
+    <!-- HILLY -->
+    <div id="hilly" class="section" style="display:block;margin-top:12px">
+      <h3>Hilly Region (Ropani · Aana · Paisa · Daam) — exact integer ratios</h3>
 
-      <!-- Price Calculator -->
-      <div class="card" style="margin-bottom:12px">
-        <h2>Price Calculator (Ropani system)</h2>
-        <label>Price per Unit</label>
-        <div class="controls-row">
+      <!-- Price -->
+      <div class="card">
+        <strong>Price Calculator (Hilly)</strong>
+        <label>Price per unit</label>
+        <div style="display:flex;gap:8px">
           <input id="h_priceRate" type="number" placeholder="e.g. 44000">
-          <select id="h_priceUnit" style="width:140px">
+          <select id="h_priceUnit" style="width:160px">
             <option value="ropani">Per Ropani</option>
             <option value="aana">Per Aana</option>
             <option value="paisa">Per Paisa</option>
@@ -84,98 +69,86 @@
           </select>
         </div>
 
-        <label style="margin-top:12px">Land (Ropani · Aana · Paisa · Daam)</label>
-        <div class="unit-row">
-          <input id="h_ropani" type="number" placeholder="Ropani">
-          <input id="h_aana" type="number" placeholder="Aana" max="15">
-          <input id="h_paisa" type="number" placeholder="Paisa" max="3">
-          <input id="h_daam" type="number" placeholder="Daam" max="3">
+        <label>Land (Ropani · Aana · Paisa · Daam)</label>
+        <div class="row">
+          <input id="h_r" type="number" placeholder="Ropani">
+          <input id="h_a" type="number" placeholder="Aana" max="15">
+          <input id="h_p" type="number" placeholder="Paisa" max="3">
+          <input id="h_d" type="number" placeholder="Daam" max="3">
         </div>
 
-        <div class="row-actions">
-          <button class="btn" onclick="calcPrice('h')">Calculate</button>
-          <button class="btn ghost" onclick="resetHillyPrice()">Reset</button>
-          <button class="small" onclick="copyText('h_priceResult')">Copy</button>
+        <div class="controls">
+          <button class="btn" onclick="h_calcPrice()">Calculate</button>
+          <button class="btn ghost" onclick="h_resetPrice()">Reset</button>
         </div>
 
-        <div id="h_priceResult" class="result" style="display:none">
-          <div class="muted">Total Price:</div>
+        <div id="h_priceRes" class="result" style="display:none">
           <div class="value" id="h_priceValue">—</div>
-          <div class="muted">Area (decimal Ropani):</div>
-          <div id="h_decimal">—</div>
+          <div style="margin-top:6px;color:var(--muted)" id="h_priceArea">—</div>
         </div>
       </div>
 
-      <!-- Add/Subtract (dynamic rows) -->
-      <div class="card" style="margin-bottom:12px">
-        <h2>Add / Subtract Land (Multiple rows)</h2>
-        <div id="h_rows">
-          <!-- initial two rows created by init -->
-        </div>
+      <!-- Add/Subtract -->
+      <div class="card" style="margin-top:12px">
+        <strong>Add / Subtract (multiple rows)</strong>
+        <div id="h_rows"></div>
         <div style="margin-top:8px">
-          <button class="btn" onclick="h_addRow()">+ Add More</button>
-          <button class="btn ghost" onclick="h_removeRow()">− Remove</button>
+          <button class="btn" onclick="h_addRow()">+ Add row</button>
+          <button class="btn ghost" onclick="h_removeRow()">− Remove row</button>
         </div>
 
-        <div style="margin-top:8px">
-          <label>Operation</label>
-          <select id="h_op">
-            <option value="add">Add (sum all rows)</option>
-            <option value="sub">Subtract (row1 - row2 - row3 ...)</option>
-          </select>
-        </div>
+        <label style="margin-top:8px">Operation</label>
+        <select id="h_op">
+          <option value="add">Add (sum all rows)</option>
+          <option value="sub">Subtract (row1 - row2 - ...)</option>
+        </select>
 
-        <div class="row-actions">
-          <button class="btn" onclick="h_computeRows()">Compute</button>
+        <div class="controls">
+          <button class="btn" onclick="h_compute()">Compute</button>
           <button class="btn ghost" onclick="h_resetRows()">Reset</button>
         </div>
 
-        <div id="h_rowsResult" class="result" style="display:none">
-          <div class="muted">Result (Ropani/Aana/Paisa/Daam):</div>
+        <div id="h_rowsRes" class="result" style="display:none">
           <div class="value" id="h_rowsValue">—</div>
-          <div class="muted">Decimal Ropani:</div>
-          <div id="h_rowsDecimal">—</div>
+          <div style="margin-top:6px;color:var(--muted)" id="h_rowsDecimal">—</div>
         </div>
       </div>
 
       <!-- Division -->
-      <div class="card">
-        <h2>Division Calculator (Split Land)</h2>
-        <label>Total Land (Ropani · Aana · Paisa · Daam)</label>
-        <div class="unit-row">
+      <div class="card" style="margin-top:12px">
+        <strong>Division (split land)</strong>
+        <label>Total land (Ropani · Aana · Paisa · Daam)</label>
+        <div class="row">
           <input id="h_div_r" type="number" placeholder="Ropani">
           <input id="h_div_a" type="number" placeholder="Aana" max="15">
           <input id="h_div_p" type="number" placeholder="Paisa" max="3">
           <input id="h_div_d" type="number" placeholder="Daam" max="3">
         </div>
-        <label>Divide into (number of parts)</label>
-        <input id="h_parts" type="number" min="1" placeholder="e.g. 2">
-        <div class="row-actions">
+        <label>Divide into (parts)</label>
+        <input id="h_div_parts" type="number" placeholder="e.g. 2">
+        <div class="controls">
           <button class="btn" onclick="h_divide()">Divide</button>
           <button class="btn ghost" onclick="h_resetDivide()">Reset</button>
         </div>
 
-        <div id="h_divResult" class="result" style="display:none">
-          <div class="muted">Each Portion:</div>
-          <div class="value" id="h_each">—</div>
-          <div class="muted">Decimal Ropani per Portion:</div>
-          <div id="h_eachDec">—</div>
-          <div class="muted" id="h_remainder" style="margin-top:8px"></div>
+        <div id="h_divRes" class="result" style="display:none">
+          <div class="value" id="h_divEach">—</div>
+          <div style="margin-top:6px;color:var(--muted)" id="h_divRem">—</div>
         </div>
       </div>
     </div>
 
-    <!-- TERAI SECTION -->
-    <div id="terai" class="section">
-      <h2>Terai Region (Bigha System)</h2>
+    <!-- TERAI -->
+    <div id="terai" class="section" style="display:none;margin-top:12px">
+      <h3>Terai Region (Bigha · Kattha · Dhur) — results shown in Bigha·Kattha·Dhur</h3>
 
-      <!-- Price Calculator -->
-      <div class="card" style="margin-bottom:12px">
-        <h2>Price Calculator (Bigha system)</h2>
-        <label>Price per Unit</label>
-        <div class="controls-row">
+      <!-- Price -->
+      <div class="card">
+        <strong>Price Calculator (Terai)</strong>
+        <label>Price per unit</label>
+        <div style="display:flex;gap:8px">
           <input id="t_priceRate" type="number" placeholder="e.g. 1200000">
-          <select id="t_priceUnit" style="width:140px">
+          <select id="t_priceUnit" style="width:160px">
             <option value="bigha">Per Bigha</option>
             <option value="kattha">Per Kattha</option>
             <option value="dhur">Per Dhur</option>
@@ -183,93 +156,81 @@
           </select>
         </div>
 
-        <label style="margin-top:12px">Land (Bigha · Kattha · Dhur)</label>
-        <div class="unit-row">
-          <input id="t_bigha" type="number" placeholder="Bigha">
-          <input id="t_kattha" type="number" placeholder="Kattha" max="19">
+        <label>Land (Bigha · Kattha · Dhur)</label>
+        <div class="row">
+          <input id="t_b" type="number" placeholder="Bigha">
+          <input id="t_k" type="number" placeholder="Kattha" max="19">
           <input id="t_dhur" type="number" placeholder="Dhur" max="19">
         </div>
 
-        <div class="row-actions">
-          <button class="btn" onclick="calcPrice('t')">Calculate</button>
-          <button class="btn ghost" onclick="resetTeraiPrice()">Reset</button>
-          <button class="small" onclick="copyText('t_priceResult')">Copy</button>
+        <div class="controls">
+          <button class="btn" onclick="t_calcPrice()">Calculate</button>
+          <button class="btn ghost" onclick="t_resetPrice()">Reset</button>
         </div>
 
-        <div id="t_priceResult" class="result" style="display:none">
-          <div class="muted">Total Price:</div>
+        <div id="t_priceRes" class="result" style="display:none">
           <div class="value" id="t_priceValue">—</div>
-          <div class="muted">Area (decimal Bigha):</div>
-          <div id="t_decimal">—</div>
+          <div style="margin-top:6px;color:var(--muted)" id="t_priceArea">—</div>
         </div>
       </div>
 
-      <!-- Add/Subtract (dynamic rows) -->
-      <div class="card" style="margin-bottom:12px">
-        <h2>Add / Subtract Land (Multiple rows)</h2>
-        <div id="t_rows">
-          <!-- initial two rows created by init -->
-        </div>
+      <!-- Add/Subtract (Terai outputs in Bigha-Kattha-Dhur) -->
+      <div class="card" style="margin-top:12px">
+        <strong>Add / Subtract (Terai rows)</strong>
+        <div id="t_rows"></div>
         <div style="margin-top:8px">
-          <button class="btn" onclick="t_addRow()">+ Add More</button>
-          <button class="btn ghost" onclick="t_removeRow()">− Remove</button>
+          <button class="btn" onclick="t_addRow()">+ Add row</button>
+          <button class="btn ghost" onclick="t_removeRow()">− Remove row</button>
         </div>
 
-        <div style="margin-top:8px">
-          <label>Operation</label>
-          <select id="t_op">
-            <option value="add">Add (sum all rows)</option>
-            <option value="sub">Subtract (row1 - row2 - row3 ...)</option>
-          </select>
-        </div>
+        <label style="margin-top:8px">Operation</label>
+        <select id="t_op">
+          <option value="add">Add (sum)</option>
+          <option value="sub">Subtract</option>
+        </select>
 
-        <div class="row-actions">
-          <button class="btn" onclick="t_computeRows()">Compute</button>
+        <div class="controls">
+          <button class="btn" onclick="t_compute()">Compute</button>
           <button class="btn ghost" onclick="t_resetRows()">Reset</button>
         </div>
 
-        <div id="t_rowsResult" class="result" style="display:none">
-          <div class="muted">Result (Ropani/Aana/Paisa/Daam):</div>
+        <div id="t_rowsRes" class="result" style="display:none">
           <div class="value" id="t_rowsValue">—</div>
-          <div class="muted">Decimal Ropani:</div>
-          <div id="t_rowsDecimal">—</div>
+          <div style="margin-top:6px;color:var(--muted)" id="t_rowsDecimal">—</div>
         </div>
       </div>
 
-      <!-- Division -->
-      <div class="card">
-        <h2>Division Calculator (Split Land)</h2>
-        <label>Total Land (Bigha · Kattha · Dhur)</label>
-        <div class="unit-row">
+      <!-- Division Terai -->
+      <div class="card" style="margin-top:12px">
+        <strong>Division (Terai)</strong>
+        <label>Total (Bigha · Kattha · Dhur)</label>
+        <div class="row">
           <input id="t_div_b" type="number" placeholder="Bigha">
           <input id="t_div_k" type="number" placeholder="Kattha">
           <input id="t_div_d" type="number" placeholder="Dhur">
         </div>
-        <label>Divide into (number of parts)</label>
-        <input id="t_parts" type="number" min="1" placeholder="e.g. 2">
-        <div class="row-actions">
+        <label>Divide into (parts)</label>
+        <input id="t_div_parts" type="number" placeholder="e.g. 2">
+        <div class="controls">
           <button class="btn" onclick="t_divide()">Divide</button>
           <button class="btn ghost" onclick="t_resetDivide()">Reset</button>
         </div>
 
-        <div id="t_divResult" class="result" style="display:none">
-          <div class="muted">Each Portion:</div>
-          <div class="value" id="t_each">—</div>
-          <div class="muted">Decimal Ropani per Portion:</div>
-          <div id="t_eachDec">—</div>
-          <div class="muted" id="t_remainder" style="margin-top:8px"></div>
+        <div id="t_divRes" class="result" style="display:none">
+          <div class="value" id="t_divEach">—</div>
+          <div style="margin-top:6px;color:var(--muted)" id="t_divRem">—</div>
         </div>
       </div>
     </div>
 
     <!-- ALL-UNIT PRICE -->
-    <div id="allunit" class="section">
-      <h2>All-Unit Land Price Calculator</h2>
+    <div id="allunit" class="section" style="display:none;margin-top:12px">
+      <h3>All-Unit Price Calculator</h3>
       <div class="card">
-        <label>Price per Unit</label>
-        <div class="controls-row">
-          <input id="a_priceRate" type="number" placeholder="Price (e.g. 100000)">
-          <select id="a_priceUnit" style="width:160px">
+        <label>Price per unit</label>
+        <div style="display:flex;gap:8px">
+          <input id="a_rate" type="number" placeholder="e.g. 100000">
+          <select id="a_unit" style="width:200px">
             <option value="bigha">Bigha</option>
             <option value="kattha">Kattha</option>
             <option value="dhur">Dhur</option>
@@ -277,86 +238,110 @@
             <option value="aana">Aana</option>
             <option value="paisa">Paisa</option>
             <option value="daam">Daam</option>
-            <option value="sqm">Square Meter (m²)</option>
-            <option value="sqft">Square Feet (ft²)</option>
+            <option value="sqm">m²</option>
+            <option value="sqft">ft²</option>
           </select>
         </div>
 
-        <label style="margin-top:12px">Enter Land (you may use any units below)</label>
-        <div class="unit-row" style="margin-bottom:8px">
-          <input id="au_bigha" type="number" placeholder="Bigha">
-          <input id="au_kattha" type="number" placeholder="Kattha">
-          <input id="au_dhur" type="number" placeholder="Dhur">
-          <input id="au_ropani" type="number" placeholder="Ropani">
-          <input id="au_aana" type="number" placeholder="Aana">
-          <input id="au_paisa" type="number" placeholder="Paisa">
+        <label>Enter area (any units)</label>
+        <div class="row" style="margin-top:8px">
+          <input id="au_b" type="number" placeholder="Bigha">
+          <input id="au_k" type="number" placeholder="Kattha">
+          <input id="au_d" type="number" placeholder="Dhur">
+          <input id="au_r" type="number" placeholder="Ropani">
+          <input id="au_a" type="number" placeholder="Aana">
+          <input id="au_p" type="number" placeholder="Paisa">
           <input id="au_daam" type="number" placeholder="Daam">
         </div>
-        <div style="margin-bottom:8px">
+        <div class="row" style="margin-top:8px">
           <input id="au_sqm" type="number" placeholder="Square meters (m²)">
           <input id="au_sqft" type="number" placeholder="Square feet (ft²)">
         </div>
 
-        <div class="row-actions">
-          <button class="btn" onclick="allunit_calc()">Calculate</button>
-          <button class="btn ghost" onclick="allunit_reset()">Reset</button>
+        <div class="controls" style="margin-top:10px">
+          <button class="btn" onclick="au_calc()">Calculate</button>
+          <button class="btn ghost" onclick="au_reset()">Reset</button>
         </div>
 
-        <div id="au_result" class="result" style="display:none">
-          <div class="muted">Total Price:</div>
+        <div id="au_res" class="result" style="display:none">
           <div class="value" id="au_price">—</div>
-          <div class="muted">Area (m²):</div>
-          <div id="au_area">—</div>
+          <div style="margin-top:6px;color:var(--muted)" id="au_area">—</div>
         </div>
       </div>
     </div>
 
     <!-- CONVERTER -->
-    <div id="converter" class="section">
-      <h2>Land Unit Converter</h2>
+    <div id="converter" class="section" style="display:none;margin-top:12px">
+      <h3>Unit Converter (exact integer conversions within same traditional system)</h3>
       <div class="card">
         <label>Value</label>
-        <input id="c_value" type="number" placeholder="Enter value" />
-        <label>Select Unit</label>
-        <select id="c_unit">
-          <option value="bigha">Bigha</option>
-          <option value="kattha">Kattha</option>
-          <option value="dhur">Dhur</option>
-          <option value="ropani">Ropani</option>
-          <option value="aana">Aana</option>
-          <option value="paisa">Paisa</option>
-          <option value="daam">Daam</option>
-          <option value="sqm">Square Meter (m²)</option>
-          <option value="sqft">Square Feet (ft²)</option>
+        <input id="c_val" type="number" placeholder="Enter value">
+
+        <label>Select unit</label>
+        <select id="c_from">
+          <optgroup label="Terai">
+            <option value="bigha">Bigha</option>
+            <option value="kattha">Kattha</option>
+            <option value="dhur">Dhur</option>
+          </optgroup>
+          <optgroup label="Hilly">
+            <option value="ropani">Ropani</option>
+            <option value="aana">Aana</option>
+            <option value="paisa">Paisa</option>
+            <option value="daam">Daam</option>
+          </optgroup>
+          <optgroup label="Area">
+            <option value="sqm">Square meters (m²)</option>
+            <option value="sqft">Square feet (ft²)</option>
+          </optgroup>
         </select>
 
-        <div class="row-actions">
-          <button class="btn" onclick="convertUnits()">Convert</button>
-          <button class="btn ghost" onclick="resetConverter()">Reset</button>
+        <label>Convert to</label>
+        <select id="c_to">
+          <optgroup label="Terai">
+            <option value="bigha">Bigha</option>
+            <option value="kattha">Kattha</option>
+            <option value="dhur">Dhur</option>
+          </optgroup>
+          <optgroup label="Hilly">
+            <option value="ropani">Ropani</option>
+            <option value="aana">Aana</option>
+            <option value="paisa">Paisa</option>
+            <option value="daam">Daam</option>
+          </optgroup>
+          <optgroup label="Area">
+            <option value="sqm">m²</option>
+            <option value="sqft">ft²</option>
+          </optgroup>
+        </select>
+
+        <div class="controls" style="margin-top:10px">
+          <button class="btn" onclick="convert()">Convert</button>
+          <button class="btn ghost" onclick="conv_reset()">Reset</button>
         </div>
 
-        <div id="c_result" class="result" style="display:none"></div>
+        <div id="c_res" class="result" style="display:none"></div>
       </div>
     </div>
-
   </div>
 
-  <footer>© 2025 Eduwonka — Nepal Land Calculator & Converter</footer>
+  <footer>© 2025 Eduwonka — All-in-One Nepal Land Calculator & Converter</footer>
 </div>
 
 <script>
-/* ---------------------------
-   Conversion constants (m²)
-   ---------------------------
+/* -------------------------
+   Constants & relationships
+   ------------------------- */
+/* Area values (provided):
    1 Bigha = 6772.63 m²
    1 Kattha = 338.63 m²
    1 Dhur = 16.93 m²
    1 Ropani = 508.72 m²
    1 Aana = 31.80 m²
    1 Paisa = 7.95 m²
-   1 Daam = 1.99 m²  <-- smallest unit
-   --------------------------- */
-const CONV = {
+   1 Daam = 1.99 m²
+*/
+const AREA = {
   bigha: 6772.63,
   kattha: 338.63,
   dhur: 16.93,
@@ -365,44 +350,38 @@ const CONV = {
   paisa: 7.95,
   daam: 1.99,
   sqm: 1,
-  sqft: 0.092903 /* 1 sqft = 0.092903 m² */
+  sqft: 0.092903
 };
 
-/* Unit relationships for Ropani system (integer breakdown)
-   1 Ropani = 16 Aana
-   1 Aana = 4 Paisa
-   1 Paisa = 4 Daam
-   => 1 Ropani = 16 * 4 * 4 = 256 Daam
-*/
-const AANA_PER_ROPANI = 16;
-const PAISA_PER_AANA = 4;
-const DAAM_PER_PAISA = 4;
-const DAAM_PER_AANA = PAISA_PER_AANA * DAAM_PER_PAISA; // 16
-const DAAM_PER_ROPANI = AANA_PER_ROPANI * DAAM_PER_AANA; // 256
-const DAAM_M2 = CONV.daam;
+/* Integer relationships */
+const HILLY = {
+  daamPerPaisa: 4,           // 1 Paisa = 4 Daam
+  paisaPerAana: 4,          // 1 Aana = 4 Paisa
+  aanaPerRopani: 16         // 1 Ropani = 16 Aana
+};
+/* Derived */
+HILLY.daamPerAana = HILLY.daamPerPaisa * HILLY.paisaPerAana; // 16
+HILLY.daamPerRopani = HILLY.daamPerAana * HILLY.aanaPerRopani; // 256
 
-/* Utility: convert Ropani/Aana/Paisa/Daam inputs (in that order) to m² */
-function radpToM2(r, a, p, d){
-  const m2 = (Number(r)||0)*CONV.ropani + (Number(a)||0)*CONV.aana + (Number(p)||0)*CONV.paisa + (Number(d)||0)*CONV.daam;
-  return m2;
+const TERAI = {
+  dhurPerKattha: 20,
+  katthaPerBigha: 20
+};
+TERAI.dhurPerBigha = TERAI.dhurPerKattha * TERAI.katthaPerBigha; // 400
+
+/* Helper: Hilly -> smallest unit (Daam) exact integer */
+function hillyToDaam(r=0,a=0,p=0,d=0){
+  return Math.trunc(r)*HILLY.daamPerRopani + Math.trunc(a)*HILLY.daamPerAana + Math.trunc(p)*HILLY.daamPerPaisa + Math.trunc(d);
 }
-
-/* Utility: convert Bigha/Kattha/Dhur to m² */
-function bkdToM2(b, k, d){ return (Number(b)||0)*CONV.bigha + (Number(k)||0)*CONV.kattha + (Number(d)||0)*CONV.dhur; }
-
-/* Convert m² to daam-count (may be fractional), then to integer RADP (using daam as smallest) */
-function m2ToDaamCount(m2){ return m2 / DAAM_M2; }
-function daamCountToRADP(daamCount){
+function daamToRADP(daamCount){
   const sign = daamCount < 0 ? -1 : 1;
-  let val = Math.abs(daamCount);
-  // integer daam units for breakdown
-  const totalDaam = Math.floor(val + 1e-9);
-  const r = Math.floor(totalDaam / DAAM_PER_ROPANI);
-  let rem = totalDaam % DAAM_PER_ROPANI;
-  const a = Math.floor(rem / DAAM_PER_AANA);
-  rem = rem % DAAM_PER_AANA;
-  const p = Math.floor(rem / DAAM_PER_PAISA);
-  const d = rem % DAAM_PER_PAISA;
+  let v = Math.abs(Math.trunc(daamCount));
+  const r = Math.floor(v / HILLY.daamPerRopani);
+  v = v % HILLY.daamPerRopani;
+  const a = Math.floor(v / HILLY.daamPerAana);
+  v = v % HILLY.daamPerAana;
+  const p = Math.floor(v / HILLY.daamPerPaisa);
+  const d = v % HILLY.daamPerPaisa;
   return { sign, r, a, p, d };
 }
 function formatRADP(obj){
@@ -410,306 +389,364 @@ function formatRADP(obj){
   return `${s}${obj.r} Ropani ${obj.a} Aana ${obj.p} Paisa ${obj.d} Daam`;
 }
 
-/* ---------------------------
-   Price calculation (Hilly & Terai)
-   --------------------------- */
-function calcPrice(mode){
-  let areaM2 = 0;
-  let rate, unit;
-  if(mode === 'h'){
-    const r = +document.getElementById('h_ropani').value || 0;
-    const a = +document.getElementById('h_aana').value || 0;
-    const p = +document.getElementById('h_paisa').value || 0;
-    const d = +document.getElementById('h_daam').value || 0;
-    areaM2 = radpToM2(r,a,p,d);
-    rate = Number(document.getElementById('h_priceRate').value);
-    unit = document.getElementById('h_priceUnit').value;
-  } else if(mode === 't'){
-    const b = +document.getElementById('t_bigha').value || 0;
-    const k = +document.getElementById('t_kattha').value || 0;
-    const dd = +document.getElementById('t_dhur').value || 0;
-    areaM2 = bkdToM2(b,k,dd);
-    rate = Number(document.getElementById('t_priceRate').value);
-    unit = document.getElementById('t_priceUnit').value;
-  } else return;
-
-  if(!rate || rate <= 0){ alert('Enter a valid price rate'); return; }
-
-  // area of selected price unit (m²)
-  let unitAreaM2;
-  if(unit === 'sqm') unitAreaM2 = CONV.sqm;
-  else if(unit === 'ropani') unitAreaM2 = CONV.ropani;
-  else if(unit === 'aana') unitAreaM2 = CONV.aana;
-  else if(unit === 'paisa') unitAreaM2 = CONV.paisa;
-  else if(unit === 'daam') unitAreaM2 = CONV.daam;
-  else if(unit === 'bigha') unitAreaM2 = CONV.bigha;
-  else if(unit === 'kattha') unitAreaM2 = CONV.kattha;
-  else if(unit === 'dhur') unitAreaM2 = CONV.dhur;
-  else unitAreaM2 = CONV.ropani;
-
-  const unitCount = areaM2 / unitAreaM2;
-  const totalPrice = unitCount * rate;
-
-  if(mode === 'h'){
-    document.getElementById('h_priceValue').textContent = '₨ ' + totalPrice.toLocaleString(undefined,{maximumFractionDigits:2});
-    document.getElementById('h_decimal').textContent = (areaM2 / CONV.ropani).toFixed(6) + ' Ropani';
-    document.getElementById('h_priceResult').style.display = 'block';
-  } else {
-    document.getElementById('t_priceValue').textContent = '₨ ' + totalPrice.toLocaleString(undefined,{maximumFractionDigits:2});
-    document.getElementById('t_decimal').textContent = (areaM2 / CONV.bigha).toFixed(6) + ' Bigha';
-    document.getElementById('t_priceResult').style.display = 'block';
-  }
+/* Helper: Terai -> smallest unit (Dhur) */
+function teraiToDhur(b=0,k=0,d=0){
+  return Math.trunc(b)*TERAI.dhurPerBigha + Math.trunc(k)*TERAI.dhurPerKattha + Math.trunc(d);
+}
+function dhurToBKD(dhurCount){
+  const sign = dhurCount < 0 ? -1 : 1;
+  let v = Math.abs(Math.trunc(dhurCount));
+  const b = Math.floor(v / TERAI.dhurPerBigha);
+  v = v % TERAI.dhurPerBigha;
+  const k = Math.floor(v / TERAI.dhurPerKattha);
+  const d = v % TERAI.dhurPerKattha;
+  return { sign, b, k, d };
+}
+function formatBKD(obj){
+  const s = obj.sign < 0 ? '-' : '';
+  return `${s}${obj.b} Bigha ${obj.k} Kattha ${obj.d} Dhur`;
 }
 
-/* Reset helpers */
-function resetHillyPrice(){ ['h_priceRate','h_ropani','h_aana','h_paisa','h_daam'].forEach(id=>document.getElementById(id).value=''); document.getElementById('h_priceResult').style.display='none'; }
-function resetTeraiPrice(){ ['t_priceRate','t_bigha','t_kattha','t_dhur'].forEach(id=>document.getElementById(id).value=''); document.getElementById('t_priceResult').style.display='none'; }
+/* -------------------------
+   Tab switching
+   ------------------------- */
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click', ()=> {
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const target = tab.getAttribute('data-target');
+    document.querySelectorAll('.section').forEach(s=>s.style.display='none');
+    document.getElementById(target).style.display='block';
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
 
-/* COPY helper */
-function copyText(resultId){
-  const el = document.getElementById(resultId);
-  if(!el || el.style.display === 'none'){ alert('No result to copy'); return; }
-  const text = el.innerText || el.textContent;
-  navigator.clipboard?.writeText(text).then(()=>alert('Copied!'), ()=>alert('Copy failed'));
-}
-
-/* ---------------------------
-   HILLY dynamic rows (Ropani · Aana · Paisa · Daam)
-   --------------------------- */
+/* -------------------------
+   Initialize dynamic rows
+   ------------------------- */
 function h_addRow(){
   const container = document.getElementById('h_rows');
   const div = document.createElement('div');
-  div.className = 'unit-row h-row';
-  div.style.marginTop = '8px';
-  div.innerHTML = `
-    <input type="number" placeholder="Ropani">
-    <input type="number" placeholder="Aana" max="15">
-    <input type="number" placeholder="Paisa" max="3">
-    <input type="number" placeholder="Daam" max="3">`;
+  div.className = 'row h-row';
+  div.style.marginTop='8px';
+  div.innerHTML = '<input type="number" placeholder="Ropani"><input type="number" placeholder="Aana" max="15"><input type="number" placeholder="Paisa" max="3"><input type="number" placeholder="Daam" max="3">';
   container.appendChild(div);
 }
 function h_removeRow(){
   const rows = document.querySelectorAll('#h_rows .h-row');
-  if(rows.length > 2) rows[rows.length-1].remove();
+  if(rows.length>2) rows[rows.length-1].remove();
 }
 function h_resetRows(){
-  const container = document.getElementById('h_rows');
-  container.innerHTML = '';
-  for(let i=0;i<2;i++){
-    const div = document.createElement('div'); div.className='unit-row h-row'; div.style.marginTop='8px';
-    div.innerHTML = `<input type="number" placeholder="Ropani">
-                     <input type="number" placeholder="Aana" max="15">
-                     <input type="number" placeholder="Paisa" max="3">
-                     <input type="number" placeholder="Daam" max="3">`;
-    container.appendChild(div);
-  }
-  document.getElementById('h_rowsResult').style.display='none';
+  const c = document.getElementById('h_rows'); c.innerHTML='';
+  for(let i=0;i<2;i++){ h_addRow(); }
+  document.getElementById('h_rowsRes').style.display='none';
 }
-function h_computeRows(){
-  const rows = document.querySelectorAll('#h_rows .h-row');
-  if(rows.length === 0){ alert('Add at least one row'); return; }
-  const op = document.getElementById('h_op').value;
-  let totalM2 = op === 'add' ? 0 : null;
-  rows.forEach((row, idx) => {
-    const inputs = row.querySelectorAll('input');
-    const r = +inputs[0].value || 0;
-    const a = +inputs[1].value || 0;
-    const p = +inputs[2].value || 0;
-    const d = +inputs[3].value || 0;
-    const m2 = radpToM2(r,a,p,d);
-    if(op === 'add') totalM2 += m2;
-    else { if(idx === 0) totalM2 = m2; else totalM2 -= m2; }
-  });
-  displayRowsResult('h', totalM2);
-}
-function displayRowsResult(prefix, m2){
-  const daamCount = m2ToDaamCount(m2);
-  const radp = daamCountToRADP(daamCount);
-  const formatted = formatRADP(radp);
-  document.getElementById(prefix + '_rowsValue').textContent = formatted;
-  document.getElementById(prefix + '_rowsDecimal').textContent = (m2 / CONV.ropani).toFixed(6) + ' Ropani';
-  document.getElementById(prefix + '_rowsResult').style.display = 'block';
-}
-
-/* Division for Hilly */
-function h_divide(){
-  const r = +document.getElementById('h_div_r').value || 0;
-  const a = +document.getElementById('h_div_a').value || 0;
-  const p = +document.getElementById('h_div_p').value || 0;
-  const d = +document.getElementById('h_div_d').value || 0;
-  const parts = Math.max(1, parseInt(document.getElementById('h_parts').value || 0));
-  if(parts < 1){ alert('Enter valid number of parts'); return; }
-  const totalM2 = radpToM2(r,a,p,d);
-  // compute per portion (we'll keep high precision)
-  const perM2 = Math.floor((totalM2 / parts) * 1000000) / 1000000;
-  const remainderM2 = totalM2 - perM2 * parts;
-  const perDaam = m2ToDaamCount(perM2);
-  const remDaam = m2ToDaamCount(remainderM2);
-  document.getElementById('h_each').textContent = formatRADP(daamCountToRADP(perDaam));
-  document.getElementById('h_eachDec').textContent = (perM2 / CONV.ropani).toFixed(6) + ' Ropani';
-  document.getElementById('h_remainder').textContent = remainderM2 > 1e-9 ? 'Remainder: ' + formatRADP(daamCountToRADP(remDaam)) : '';
-  document.getElementById('h_divResult').style.display = 'block';
-}
-function h_resetDivide(){ ['h_div_r','h_div_a','h_div_p','h_div_d','h_parts'].forEach(id=>document.getElementById(id).value=''); document.getElementById('h_divResult').style.display='none'; }
-
-/* ---------------------------
-   TERAI dynamic rows
-   --------------------------- */
 function t_addRow(){
   const container = document.getElementById('t_rows');
   const div = document.createElement('div');
-  div.className = 'unit-row t-row';
-  div.style.marginTop = '8px';
-  div.innerHTML = `
-    <input type="number" placeholder="Bigha">
-    <input type="number" placeholder="Kattha" max="19">
-    <input type="number" placeholder="Dhur" max="19">`;
+  div.className='row t-row'; div.style.marginTop='8px';
+  div.innerHTML = '<input type="number" placeholder="Bigha"><input type="number" placeholder="Kattha" max="19"><input type="number" placeholder="Dhur" max="19">';
   container.appendChild(div);
 }
 function t_removeRow(){
   const rows = document.querySelectorAll('#t_rows .t-row');
-  if(rows.length > 2) rows[rows.length-1].remove();
+  if(rows.length>2) rows[rows.length-1].remove();
 }
 function t_resetRows(){
-  const container = document.getElementById('t_rows');
-  container.innerHTML = '';
-  for(let i=0;i<2;i++){
-    const div = document.createElement('div'); div.className='unit-row t-row'; div.style.marginTop='8px';
-    div.innerHTML = `<input type="number" placeholder="Bigha">
-                     <input type="number" placeholder="Kattha" max="19">
-                     <input type="number" placeholder="Dhur" max="19">`;
-    container.appendChild(div);
-  }
-  document.getElementById('t_rowsResult').style.display='none';
+  const c = document.getElementById('t_rows'); c.innerHTML='';
+  for(let i=0;i<2;i++){ t_addRow(); }
+  document.getElementById('t_rowsRes').style.display='none';
 }
-function t_computeRows(){
-  const rows = document.querySelectorAll('#t_rows .t-row');
-  if(rows.length === 0){ alert('Add at least one row'); return; }
+
+/* Initialize rows on load */
+h_resetRows(); t_resetRows();
+
+/* -------------------------
+   Hilly Price: uses exact integer when unit is daam/aana/paisa/ropani,
+   otherwise uses area (sqm) if selected.
+   ------------------------- */
+function h_calcPrice(){
+  const rate = Number(document.getElementById('h_priceRate').value);
+  const unit = document.getElementById('h_priceUnit').value;
+  if(!rate || rate<=0){ alert('Enter valid rate'); return; }
+
+  // compute total area in two ways: (A) exact daam count for integer units, (B) m² via area constants
+  const r = Number(document.getElementById('h_r').value)||0;
+  const a = Number(document.getElementById('h_a').value)||0;
+  const p = Number(document.getElementById('h_p').value)||0;
+  const d = Number(document.getElementById('h_d').value)||0;
+
+  const daamCount = hillyToDaam(r,a,p,d);
+  const areaM2 = r*AREA.ropani + a*AREA.aana + p*AREA.paisa + d*AREA.daam;
+
+  let totalPrice = 0;
+  if(unit === 'daam'){ totalPrice = daamCount * rate; }               // price per daam
+  else if(unit === 'paisa'){ totalPrice = (Math.floor(daamCount / HILLY.daamPerPaisa) * rate) + ((daamCount % HILLY.daamPerPaisa) * (rate / HILLY.daamPerPaisa)); /* rare fractional */ }
+  else if(unit === 'aana'){ totalPrice = (daamCount / HILLY.daamPerAana) * rate; }
+  else if(unit === 'ropani'){ totalPrice = (daamCount / HILLY.daamPerRopani) * rate; }
+  else if(unit === 'sqm'){ totalPrice = (areaM2 / AREA.sqm) * rate; }
+  else { totalPrice = (areaM2 / AREA.ropani) * rate; }
+
+  document.getElementById('h_priceValue').textContent = '₨ ' + Number(totalPrice).toLocaleString(undefined,{maximumFractionDigits:2});
+  document.getElementById('h_priceArea').textContent = 'Area: '+ formatRADP(daamCountToRADP(daamCount)) + ' • ('+ (areaM2.toFixed(3)) +' m²)';
+  document.getElementById('h_priceRes').style.display='block';
+}
+
+/* Reset hilly price inputs */
+function h_resetPrice(){ ['h_priceRate','h_r','h_a','h_p','h_d'].forEach(id=>document.getElementById(id).value=''); document.getElementById('h_priceRes').style.display='none'; }
+
+/* Hilly compute add/subtract rows (works in daam base, displays RADP) */
+function h_compute(){
+  const op = document.getElementById('h_op').value;
+  const rows = document.querySelectorAll('#h_rows .h-row');
+  if(rows.length===0){ alert('Add at least one row'); return; }
+  let totalDaam = (op==='add') ? 0 : null;
+  rows.forEach((row, idx)=> {
+    const ins = row.querySelectorAll('input');
+    const r = Number(ins[0].value)||0;
+    const a = Number(ins[1].value)||0;
+    const p = Number(ins[2].value)||0;
+    const d = Number(ins[3].value)||0;
+    const daam = hillyToDaam(r,a,p,d);
+    if(op==='add') totalDaam += daam;
+    else { if(idx===0) totalDaam = daam; else totalDaam -= daam; }
+  });
+  const radp = daamCountToRADP(totalDaam);
+  document.getElementById('h_rowsValue').textContent = formatRADP(radp);
+  document.getElementById('h_rowsDecimal').textContent = 'Decimal Ropani: ' + ( ( (totalDaam) / HILLY.daamPerRopani ).toFixed(6) ) + ' Ropani';
+  document.getElementById('h_rowsRes').style.display='block';
+}
+
+/* Hilly division */
+function h_divide(){
+  const r = Number(document.getElementById('h_div_r').value)||0;
+  const a = Number(document.getElementById('h_div_a').value)||0;
+  const p = Number(document.getElementById('h_div_p').value)||0;
+  const d = Number(document.getElementById('h_div_d').value)||0;
+  const parts = Math.max(1, parseInt(document.getElementById('h_div_parts').value||0));
+  if(parts<1){ alert('Enter valid number of parts'); return; }
+  const totalDaam = hillyToDaam(r,a,p,d);
+  const per = Math.floor(totalDaam / parts);
+  const rem = Math.abs(totalDaam - per*parts);
+  document.getElementById('h_divEach').textContent = 'Each: ' + formatRADP(daamCountToRADP(per));
+  document.getElementById('h_divRem').textContent = rem>0 ? 'Remainder: ' + formatRADP(daamCountToRADP(rem)) : '';
+  document.getElementById('h_divRes').style.display='block';
+}
+function h_resetDivide(){ ['h_div_r','h_div_a','h_div_p','h_div_d','h_div_parts'].forEach(id=>document.getElementById(id).value=''); document.getElementById('h_divRes').style.display='none'; }
+
+/* -------------------------
+   TERAI functions: compute in Dhur base and DISPLAY in Bigha/Kattha/Dhur
+   ------------------------- */
+function t_calcPrice(){
+  const rate = Number(document.getElementById('t_priceRate').value);
+  const unit = document.getElementById('t_priceUnit').value;
+  if(!rate || rate<=0){ alert('Enter valid rate'); return; }
+  const b = Number(document.getElementById('t_b').value)||0;
+  const k = Number(document.getElementById('t_k').value)||0;
+  const d = Number(document.getElementById('t_dhur').value)||0;
+
+  const totalDhur = teraiToDhur(b,k,d);
+  const areaM2 = b*AREA.bigha + k*AREA.kattha + d*AREA.dhur;
+
+  let totalPrice = 0;
+  if(unit==='dhur'){ totalPrice = totalDhur * rate; }
+  else if(unit==='kattha'){ totalPrice = (totalDhur / TERAI.dhurPerKattha) * rate; }
+  else if(unit==='bigha'){ totalPrice = (totalDhur / TERAI.dhurPerBigha) * rate; }
+  else { totalPrice = (areaM2 / AREA.sqm) * rate; }
+
+  document.getElementById('t_priceValue').textContent = '₨ ' + Number(totalPrice).toLocaleString(undefined,{maximumFractionDigits:2});
+  document.getElementById('t_priceArea').textContent = 'Area: ' + formatBKD(dhurToBKD(totalDhur)) + ' • ('+ areaM2.toFixed(3) +' m²)';
+  document.getElementById('t_priceRes').style.display='block';
+}
+function t_resetPrice(){ ['t_priceRate','t_b','t_k','t_dhur'].forEach(id=>document.getElementById(id).value=''); document.getElementById('t_priceRes').style.display='none'; }
+
+/* Terai add/subtract (in dhur) */
+function t_compute(){
   const op = document.getElementById('t_op').value;
-  let totalM2 = op === 'add' ? 0 : null;
-  rows.forEach((row, idx) => {
-    const inputs = row.querySelectorAll('input');
-    const b = +inputs[0].value || 0;
-    const k = +inputs[1].value || 0;
-    const d = +inputs[2].value || 0;
-    const m2 = bkdToM2(b,k,d);
-    if(op === 'add') totalM2 += m2;
-    else { if(idx === 0) totalM2 = m2; else totalM2 -= m2; }
+  const rows = document.querySelectorAll('#t_rows .t-row');
+  if(rows.length===0){ alert('Add at least one row'); return; }
+  let totalDhur = (op==='add') ? 0 : null;
+  rows.forEach((row, idx)=>{
+    const ins = row.querySelectorAll('input');
+    const b = Number(ins[0].value)||0;
+    const k = Number(ins[1].value)||0;
+    const d = Number(ins[2].value)||0;
+    const dh = teraiToDhur(b,k,d);
+    if(op==='add') totalDhur += dh;
+    else { if(idx===0) totalDhur = dh; else totalDhur -= dh; }
   });
-  displayRowsResult('t', totalM2);
+  const bkd = dhurToBKD(totalDhur);
+  document.getElementById('t_rowsValue').textContent = formatBKD(bkd);
+  document.getElementById('t_rowsDecimal').textContent = 'Decimal Bigha: ' + ( (totalDhur / TERAI.dhurPerBigha).toFixed(6) ) + ' Bigha';
+  document.getElementById('t_rowsRes').style.display='block';
 }
 
-/* Division for Terai */
+/* Terai division */
 function t_divide(){
-  const b = +document.getElementById('t_div_b').value || 0;
-  const k = +document.getElementById('t_div_k').value || 0;
-  const d = +document.getElementById('t_div_d').value || 0;
-  const parts = Math.max(1, parseInt(document.getElementById('t_parts').value || 0));
-  if(parts < 1){ alert('Enter valid number of parts'); return; }
-  const totalM2 = bkdToM2(b,k,d);
-  const perM2 = Math.floor((totalM2 / parts) * 1000000) / 1000000;
-  const remainderM2 = totalM2 - perM2 * parts;
-  document.getElementById('t_each').textContent = formatRADP(daamCountToRADP(m2ToDaamCount(perM2)));
-  document.getElementById('t_eachDec').textContent = (perM2 / CONV.ropani).toFixed(6) + ' Ropani';
-  document.getElementById('t_remainder').textContent = remainderM2 > 1e-9 ? 'Remainder: ' + formatRADP(daamCountToRADP(m2ToDaamCount(remainderM2))) : '';
-  document.getElementById('t_divResult').style.display='block';
+  const b = Number(document.getElementById('t_div_b').value)||0;
+  const k = Number(document.getElementById('t_div_k').value)||0;
+  const d = Number(document.getElementById('t_div_d').value)||0;
+  const parts = Math.max(1, parseInt(document.getElementById('t_div_parts').value||0));
+  if(parts<1){ alert('Enter valid number of parts'); return; }
+  const totalDhur = teraiToDhur(b,k,d);
+  const per = Math.floor(totalDhur / parts);
+  const rem = Math.abs(totalDhur - per*parts);
+  document.getElementById('t_divEach').textContent = 'Each: ' + formatBKD(dhurToBKD(per));
+  document.getElementById('t_divRem').textContent = rem>0 ? 'Remainder: ' + formatBKD(dhurToBKD(rem)) : '';
+  document.getElementById('t_divRes').style.display='block';
 }
-function t_resetDivide(){ ['t_div_b','t_div_k','t_div_d','t_parts'].forEach(id=>document.getElementById(id).value=''); document.getElementById('t_divResult').style.display='none'; }
+function t_resetDivide(){ ['t_div_b','t_div_k','t_div_d','t_div_parts'].forEach(id=>document.getElementById(id).value=''); document.getElementById('t_divRes').style.display='none'; }
 
-/* ---------------------------
-   ALL-UNIT Calculator
-   --------------------------- */
-function allunit_calc(){
-  const rate = Number(document.getElementById('a_priceRate').value);
-  const unit = document.getElementById('a_priceUnit').value;
-  if(!rate || rate <= 0) { alert('Enter valid rate'); return; }
-  // gather area
-  let areaM2 = 0;
-  areaM2 += (Number(document.getElementById('au_bigha').value) || 0) * CONV.bigha;
-  areaM2 += (Number(document.getElementById('au_kattha').value) || 0) * CONV.kattha;
-  areaM2 += (Number(document.getElementById('au_dhur').value) || 0) * CONV.dhur;
-  areaM2 += (Number(document.getElementById('au_ropani').value) || 0) * CONV.ropani;
-  areaM2 += (Number(document.getElementById('au_aana').value) || 0) * CONV.aana;
-  areaM2 += (Number(document.getElementById('au_paisa').value) || 0) * CONV.paisa;
-  areaM2 += (Number(document.getElementById('au_daam').value) || 0) * CONV.daam;
-  areaM2 += (Number(document.getElementById('au_sqm').value) || 0);
-  const sqft = Number(document.getElementById('au_sqft').value) || 0;
-  areaM2 += sqft * CONV.sqft;
+/* -------------------------
+   All-unit price: gathers mixed inputs, converts to m², then price by selected unit
+   ------------------------- */
+function au_calc(){
+  const rate = Number(document.getElementById('a_rate').value);
+  const unit = document.getElementById('a_unit').value;
+  if(!rate || rate<=0){ alert('Enter valid rate'); return; }
 
-  let unitArea = CONV[unit] || CONV.ropani;
-  if(unit === 'sqft') unitArea = CONV.sqft;
+  // gather all inputs and convert to m²
+  let area = 0;
+  area += (Number(document.getElementById('au_b').value)||0) * AREA.bigha;
+  area += (Number(document.getElementById('au_k').value)||0) * AREA.kattha;
+  area += (Number(document.getElementById('au_d').value)||0) * AREA.dhur;
+  area += (Number(document.getElementById('au_r').value)||0) * AREA.ropani;
+  area += (Number(document.getElementById('au_a').value)||0) * AREA.aana;
+  area += (Number(document.getElementById('au_p').value)||0) * AREA.paisa;
+  area += (Number(document.getElementById('au_daam').value)||0) * AREA.daam;
+  area += (Number(document.getElementById('au_sqm').value)||0) * AREA.sqm;
+  area += (Number(document.getElementById('au_sqft').value)||0) * AREA.sqft;
 
-  const unitsCount = areaM2 / unitArea;
-  const totalPrice = unitsCount * rate;
+  // compute unit area in m²
+  let unitArea = AREA[unit] || AREA.ropani;
+  if(unit === 'sqft') unitArea = AREA.sqft;
 
-  document.getElementById('au_price').textContent = '₨ ' + totalPrice.toLocaleString(undefined,{maximumFractionDigits:2});
-  document.getElementById('au_area').textContent = areaM2.toFixed(3) + ' m²';
-  document.getElementById('au_result').style.display = 'block';
+  const countUnits = area / unitArea;
+  const totalPrice = countUnits * rate;
+  document.getElementById('au_price').textContent = '₨ ' + Number(totalPrice).toLocaleString(undefined,{maximumFractionDigits:2});
+  document.getElementById('au_area').textContent = 'Area: ' + area.toFixed(3) + ' m²';
+  document.getElementById('au_res').style.display='block';
 }
-function allunit_reset(){ ['a_priceRate','au_bigha','au_kattha','au_dhur','au_ropani','au_aana','au_paisa','au_daam','au_sqm','au_sqft'].forEach(id=>document.getElementById(id).value=''); document.getElementById('au_result').style.display='none'; }
+function au_reset(){ ['a_rate','au_b','au_k','au_d','au_r','au_a','au_p','au_daam','au_sqm','au_sqft'].forEach(id=>document.getElementById(id).value=''); document.getElementById('au_res').style.display='none'; }
 
-/* ---------------------------
-   CONVERTER
-   --------------------------- */
-function convertUnits(){
-  const val = Number(document.getElementById('c_value').value);
-  const unit = document.getElementById('c_unit').value;
+/* -------------------------
+   Converter: uses integer mapping when both units are in same traditional system
+   otherwise uses area conversion (m²) as bridge
+   ------------------------- */
+function convert(){
+  const val = Number(document.getElementById('c_val').value);
+  const from = document.getElementById('c_from').value;
+  const to = document.getElementById('c_to').value;
   if(isNaN(val) || val <= 0){ alert('Enter valid value'); return; }
-  let m2 = 0;
-  if(unit === 'sqm') m2 = val;
-  else if(unit === 'sqft') m2 = val * CONV.sqft;
-  else m2 = val * (CONV[unit] || 1);
 
-  const sqft = m2 / CONV.sqft;
-  const results = {
-    bigha: (m2 / CONV.bigha),
-    kattha: (m2 / CONV.kattha),
-    dhur: (m2 / CONV.dhur),
-    ropani: (m2 / CONV.ropani),
-    aana: (m2 / CONV.aana),
-    paisa: (m2 / CONV.paisa),
-    daam: (m2 / CONV.daam),
-    sqm: m2,
-    sqft: sqft
-  };
+  const out = document.getElementById('c_res');
+  out.style.display='block';
+  // If both in Hilly group and both non-area, use integer mapping via daam
+  const hillyUnits = ['ropani','aana','paisa','daam'];
+  const teraiUnits = ['bigha','kattha','dhur'];
 
-  const out = document.getElementById('c_result');
-  out.innerHTML = `
-    <p><b>${val} ${unit === 'sqm' ? 'm²' : unit === 'sqft' ? 'ft²' : unit}</b> equals:</p><hr>
-    <p>🌾 <b>${results.bigha.toFixed(6)}</b> Bigha</p>
-    <p>🌾 <b>${results.kattha.toFixed(6)}</b> Kattha</p>
-    <p>🌾 <b>${results.dhur.toFixed(6)}</b> Dhur</p>
-    <p>⛰️ <b>${results.ropani.toFixed(6)}</b> Ropani</p>
-    <p>⛰️ <b>${results.aana.toFixed(6)}</b> Aana</p>
-    <p>⛰️ <b>${results.paisa.toFixed(6)}</b> Paisa</p>
-    <p>⛰️ <b>${results.daam.toFixed(6)}</b> Daam</p>
-    <hr>
-    <p>📏 <b>${results.sqm.toFixed(3)}</b> m²</p>
-    <p>📐 <b>${results.sqft.toFixed(3)}</b> ft²</p>
-  `;
-  out.style.display = 'block';
+  if(hillyUnits.includes(from) && hillyUnits.includes(to)){
+    // convert input to daam integer, then to target
+    let daam = 0;
+    if(from==='ropani') daam = val * HILLY.daamPerRopani;
+    else if(from==='aana') daam = val * HILLY.daamPerAana;
+    else if(from==='paisa') daam = val * HILLY.daamPerPaisa;
+    else daam = val;
+    // exact mapping
+    let result = 0;
+    if(to==='ropani') result = daam / HILLY.daamPerRopani;
+    else if(to==='aana') result = daam / HILLY.daamPerAana;
+    else if(to==='paisa') result = daam / HILLY.daamPerPaisa;
+    else result = daam;
+    out.innerHTML = `<b>${val} ${from}</b> = <b>${result}</b> ${to} (exact integer mapping used; 1 Ropani = ${HILLY.daamPerRopani} Daam)`;
+    return;
+  }
+
+  // If both in Terai group and both non-area
+  if(teraiUnits.includes(from) && teraiUnits.includes(to)){
+    let dhur = 0;
+    if(from==='bigha') dhur = val * TERAI.dhurPerBigha;
+    else if(from==='kattha') dhur = val * TERAI.dhurPerKattha;
+    else dhur = val;
+    let result = 0;
+    if(to==='bigha') result = dhur / TERAI.dhurPerBigha;
+    else if(to==='kattha') result = dhur / TERAI.dhurPerKattha;
+    else result = dhur;
+    out.innerHTML = `<b>${val} ${from}</b> = <b>${result}</b> ${to} (exact integer mapping used; 1 Bigha = ${TERAI.dhurPerBigha} Dhur)`;
+    return;
+  }
+
+  // Otherwise use area as bridge (m²)
+  let areaM2 = 0;
+  if(from==='sqm') areaM2 = val;
+  else if(from==='sqft') areaM2 = val * AREA.sqft;
+  else if(hillyUnits.includes(from)){
+    // use integer mapping for hilly -> daam -> area using AREA.daam (daam area)
+    if(from==='ropani') areaM2 = val * AREA.ropani;
+    else if(from==='aana') areaM2 = val * AREA.aana;
+    else if(from==='paisa') areaM2 = val * AREA.paisa;
+    else areaM2 = val * AREA.daam;
+  } else if(teraiUnits.includes(from)){
+    if(from==='bigha') areaM2 = val * AREA.bigha;
+    else if(from==='kattha') areaM2 = val * AREA.kattha;
+    else areaM2 = val * AREA.dhur;
+  } else areaM2 = val * AREA.sqm;
+
+  // now convert areaM2 to target
+  let toVal = 0;
+  if(to==='sqm') toVal = areaM2;
+  else if(to==='sqft') toVal = areaM2 / AREA.sqft;
+  else if(hillyUnits.includes(to)){
+    if(to==='ropani') toVal = areaM2 / AREA.ropani;
+    else if(to==='aana') toVal = areaM2 / AREA.aana;
+    else if(to==='paisa') toVal = areaM2 / AREA.paisa;
+    else toVal = areaM2 / AREA.daam;
+  } else if(teraiUnits.includes(to)){
+    if(to==='bigha') toVal = areaM2 / AREA.bigha;
+    else if(to==='kattha') toVal = areaM2 / AREA.kattha;
+    else toVal = areaM2 / AREA.dhur;
+  } else toVal = areaM2;
+
+  // Additionally: if converting exactly 1 Ropani -> Daam and we used area above,
+  // the user expects exact 256 Daam. But earlier branch already handled same-system exact mapping.
+  out.innerHTML = `<b>${val} ${from}</b> ≈ <b>${Number(toVal).toFixed(6)}</b> ${to} (area-based conversion used)`;
 }
-function resetConverter(){ ['c_value','c_unit'].forEach(id=>document.getElementById(id).value=''); document.getElementById('c_result').style.display='none'; }
 
-/* ---------------------------
-   Page initialization & tabs
-   --------------------------- */
-function init(){
-  h_resetRows();
-  t_resetRows();
+/* Conv reset */
+function conv_reset(){ ['c_val','c_from','c_to'].forEach(id=>document.getElementById(id).value=''); document.getElementById('c_res').style.display='none'; }
 
-  document.querySelectorAll('.tab').forEach(tab=>{
-    tab.addEventListener('click', ()=>{
-      document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-      tab.classList.add('active');
-      const target = tab.getAttribute('data-target');
-      document.querySelectorAll('.section').forEach(sec=>sec.classList.remove('active'));
-      document.getElementById(target).classList.add('active');
-      window.scrollTo({top:0,behavior:'smooth'});
-    });
-  });
+/* Utility: convert daamCount to RADP object (used earlier) */
+function daamCountToRADP(daamCount){ return daamCountToRADP_internal(daamCount); }
+function daamCountToRADP_internal(daamCount){
+  // same as daamCountToRADP previously implemented inline: re-use daamToRADP conversion
+  return daamToRADP(daamCount);
 }
-init();
+
+/* small helpers to avoid hoisting issues */
+function daamToRADP(n){ return daamToRADP_core(n); }
+function daamToRADP_core(daamCount){
+  const sign = daamCount < 0 ? -1 : 1;
+  let v = Math.abs(Math.trunc(daamCount));
+  const r = Math.floor(v / HILLY.daamPerRopani);
+  v = v % HILLY.daamPerRopani;
+  const a = Math.floor(v / HILLY.daamPerAana);
+  v = v % HILLY.daamPerAana;
+  const p = Math.floor(v / HILLY.daamPerPaisa);
+  const d = v % HILLY.daamPerPaisa;
+  return { sign, r, a, p, d };
+}
+function dhurToBKD(n){ return dhurToBKD_core(n); }
+function dhurToBKD_core(dhurCount){
+  const sign = dhurCount < 0 ? -1 : 1;
+  let v = Math.abs(Math.trunc(dhurCount));
+  const b = Math.floor(v / TERAI.dhurPerBigha);
+  v = v % TERAI.dhurPerBigha;
+  const k = Math.floor(v / TERAI.dhurPerKattha);
+  const d = v % TERAI.dhurPerKattha;
+  return { sign, b, k, d };
+}
+
+/* End of script */
 </script>
 </body>
 </html>
